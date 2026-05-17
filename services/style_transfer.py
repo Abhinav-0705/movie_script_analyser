@@ -26,7 +26,8 @@ def rewrite_scene(base_prompt: str, chunk_text: str) -> str:
         f"---\n{chunk_text}\n---\n\n"
         f"TASK:\n"
         f"Rewrite this scene COMPLETELY following the style rules above.\n"
-        f"- Keep the exact same plot events, characters, and meaning.\n"
+        f"- CRITICAL: Keep ALL character names EXACTLY as they appear in the original (e.g. Bheem, Ram, Malli, Jenny, Scott). Do NOT rename any character under any circumstances.\n"
+        f"- Keep the exact same plot events and meaning.\n"
         f"- Completely transform the dialogue tone, the scene setting, and the vibe.\n"
         f"- Add proper screenplay formatting (scene headings, action lines, character names).\n"
     )

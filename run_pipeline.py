@@ -19,9 +19,9 @@ from services.sentiment_analyzer import analyze_sentiment, timeline_to_dict
 from services.pacing_detector    import detect_pacing, report_to_dict
 from services.critique_engine    import generate_critique, report_to_dict as critique_to_dict
 
-SRT_FILE   = os.path.join(ROOT, "RRR 2022 JPN UHD en full.srt")
-FILM_TITLE = "RRR"
-GENRE      = "action/epic"
+SRT_FILE   = os.path.join(ROOT, "Avengers.Endgame.2019.1080p.WEBRip.x264-RARBG-en.srt")
+FILM_TITLE = "Avengers: Endgame"
+GENRE      = "action/sci-fi"
 
 def run(max_chunks: int = 18, use_llm: bool = True, run_micro: bool = True,
         user_climax_chunk: int = None, run_critique: bool = True):

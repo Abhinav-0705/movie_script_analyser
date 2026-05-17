@@ -80,9 +80,8 @@ def refresh_data():
     if st.session_state.sentiment_data and st.session_state.pacing_data and st.session_state.critique_data:
         st.session_state.analysis_done = True
 
-# Initialize state from disk on first load if available
-if not st.session_state.analysis_done:
-    refresh_data()
+# Always refresh state from disk on load so manual reruns are reflected
+refresh_data()
 
 
 # ── Sidebar & Pipeline Runner ─────────────────────────────────────────────────
@@ -145,7 +144,7 @@ with m1:
     st.markdown(f"""
         <div class="metric-card">
             <div class="metric-label">Screenplay Score</div>
-            <div class="metric-value">{crit_data.get('score', 0):.1f}<span style='font-size:1.5rem;color:#777;'>/10</span></div>
+            <div class="metric-value">{crit_data.get('screenplay_score', 0):.1f}<span style='font-size:1.5rem;color:#777;'>/10</span></div>
         </div>
     """, unsafe_allow_html=True)
 with m2:
@@ -192,12 +191,16 @@ with col_left:
     # Add horizontal zero line
     fig_arc.add_hline(y=0, line_dash="dash", line_color="gray", annotation_text="Neutral", opacity=0.5)
     
-    # Add Act boundaries if they exist
+    # Add Act boundaries — limit to 3 most significant to avoid clutter
     acts = pace_data.get('act_boundaries', [])
     if acts:
-        for act_chunk in acts:
-            fig_arc.add_vline(x=act_chunk, line_dash="dot", line_color="#00FFAA", 
-                              annotation_text="Act Change", annotation_position="top right", opacity=0.7)
+        step = max(1, len(acts) // 3)
+        acts_to_show = acts[::step][:3]
+        labels = ["Act 2", "Midpoint", "Act 3"]
+        for i, act_chunk in enumerate(acts_to_show):
+            fig_arc.add_vline(x=act_chunk, line_dash="dot", line_color="#00FFAA",
+                              annotation_text=labels[i],
+                              annotation_position="top left", opacity=0.8)
             
     fig_arc.update_layout(yaxis_range=[-1.1, 1.1], height=400, margin=dict(l=0, r=0, t=30, b=0))
     st.plotly_chart(fig_arc, use_container_width=True)
@@ -224,6 +227,47 @@ with col_right:
     st.plotly_chart(fig_heat, use_container_width=True)
 
 
+# ── ROW 2: Tension Debt + Momentum Spikes ─────────────────────────────────────
+st.markdown("<hr>", unsafe_allow_html=True)
+col_debt, col_mom = st.columns(2)
+
+with col_debt:
+    st.subheader("💳 Tension Debt Curve")
+    st.caption("Accumulated emotional debt when film stays too comfortable. Spikes = fatigue risk.")
+    debt_curve = pace_data.get('tension_debt_curve', [])
+    if debt_curve:
+        df_debt = pd.DataFrame({"Chunk": list(range(1, len(debt_curve)+1)), "Tension Debt": debt_curve})
+        fig_debt = px.area(df_debt, x="Chunk", y="Tension Debt",
+                           template="plotly_dark", color_discrete_sequence=["#F5A623"])
+        fig_debt.add_hline(y=1.2, line_dash="dash", line_color="#E50914",
+                           annotation_text="Fatigue Threshold", opacity=0.8)
+        fig_debt.update_layout(height=300, margin=dict(l=0, r=0, t=10, b=0), yaxis_range=[0, 2])
+        st.plotly_chart(fig_debt, width='stretch')
+    else:
+        st.info("No tension debt data available.")
+
+with col_mom:
+    st.subheader("⚡ Narrative Momentum")
+    st.caption("Rate of emotional change per chunk. Green = rising (victory/relief). Red = falling (betrayal/shock).")
+    momentum = pace_data.get('momentum_timeline', [])
+    if momentum:
+        mom_chunks = [m['chunk_id'] for m in momentum]
+        mom_deltas = [m['delta'] for m in momentum]
+        mom_colors = ['#00C851' if d > 0 else '#E50914' for d in mom_deltas]
+        fig_mom = go.Figure(go.Bar(
+            x=mom_chunks, y=mom_deltas,
+            marker_color=mom_colors, opacity=0.85
+        ))
+        fig_mom.update_layout(
+            template="plotly_dark", height=300,
+            margin=dict(l=0, r=0, t=10, b=0),
+            xaxis_title="Chunk", yaxis_title="Δ Score",
+            yaxis=dict(zeroline=True, zerolinecolor='gray', zerolinewidth=1)
+        )
+        st.plotly_chart(fig_mom, width='stretch')
+    else:
+        st.info("No momentum data available.")
+
 st.markdown("<hr>", unsafe_allow_html=True)
 
 # ── CRITIQUE & HERO'S JOURNEY ──
@@ -234,12 +278,12 @@ with col_crit:
     st.markdown(f"""
         <div class="critique-box">
             <h4>🤖 Overall Verdict</h4>
-            <p>{crit_data.get('verdict', 'No verdict generated.')}</p>
+            <p>{crit_data.get('overall_verdict', 'No verdict generated.')}</p>
         </div>
     """, unsafe_allow_html=True)
     
     st.subheader("🔧 Top 3 Fixes")
-    for fix in crit_data.get('top_fixes', []):
+    for fix in crit_data.get('top_3_fixes', []):
         st.info(fix)
         
     plot_issues = crit_data.get('plot_issues', [])
@@ -252,7 +296,7 @@ with col_crit:
 
 with col_hero:
     st.subheader("🗺️ Hero's Journey Map")
-    hero_map = pace_data.get('hero_journey', {})
+    hero_map = pace_data.get('hero_journey_map', {})
     
     if not hero_map:
         st.info("Hero's Journey analysis was skipped (likely due to short chunk count).")
@@ -266,6 +310,68 @@ with col_hero:
         
         for chunk, stage in mapped_items:
             st.markdown(f"**Chunk {chunk}:** {stage}")
+
+# ── ROW 3: Score Breakdown + Character Arcs ───────────────────────────────────
+st.markdown("<hr>", unsafe_allow_html=True)
+col_radar, col_chars = st.columns([1, 2])
+
+with col_radar:
+    st.subheader("📊 Score Breakdown")
+    breakdown = crit_data.get('score_breakdown', {})
+    if breakdown:
+        categories = ['Pacing', 'Emotional Range', 'Dialogue', 'Structure']
+        values     = [
+            breakdown.get('pacing', 0),
+            breakdown.get('emotional_range', 0),
+            breakdown.get('dialogue', 0),
+            breakdown.get('structure', 0),
+        ]
+        # Close the radar polygon
+        fig_radar = go.Figure(go.Scatterpolar(
+            r     = values + [values[0]],
+            theta = categories + [categories[0]],
+            fill  = 'toself',
+            fillcolor = 'rgba(229,9,20,0.25)',
+            line  = dict(color='#E50914', width=2),
+            name  = 'Score'
+        ))
+        fig_radar.update_layout(
+            polar  = dict(
+                radialaxis=dict(visible=True, range=[0,10],
+                                tickfont=dict(color='#aaa'), gridcolor='#333'),
+                angularaxis=dict(tickfont=dict(color='#eee'))
+            ),
+            template = "plotly_dark",
+            height   = 320,
+            margin   = dict(l=20, r=20, t=20, b=20),
+            showlegend = False
+        )
+        st.plotly_chart(fig_radar, width='stretch')
+    else:
+        st.info("Score breakdown not available.")
+
+with col_chars:
+    st.subheader("👥 Character Arcs")
+    char_arcs = crit_data.get('character_arcs', [])
+    if char_arcs:
+        arc_color = {
+            "Transformational": "🟢",
+            "Flat":             "🟡",
+            "Tragic":           "🔴",
+            "Absent":           "⚫"
+        }
+        for arc in char_arcs:
+            badge = arc_color.get(arc.get('arc_type',''), "⚪")
+            pct   = int(arc.get('screen_presence', 0) * 100)
+            with st.container():
+                st.markdown(
+                    f"{badge} **{arc['name']}** — {arc['arc_type']} arc "
+                    f"| {arc.get('line_count',0)} lines | {pct}% screen presence"
+                )
+                st.caption(arc.get('emotional_journey', ''))
+                st.markdown("---")
+    else:
+        st.info("No character data — run MS-2 character extractor first.")
 
 # ── MS-7 STYLE TRANSFER PANEL (Bonus) ──
 st.markdown("<hr>", unsafe_allow_html=True)

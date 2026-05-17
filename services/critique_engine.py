@@ -230,7 +230,7 @@ def critique_dialogue(sentiment: dict) -> list[DialogueCritique]:
 
 
 # ── Step 5: Plot / Structural Issue Detection ────────────────────────────────
-def detect_plot_issues(sentiment: dict, pacing: dict, character: dict = None) -> list[PlotIssue]:
+def detect_plot_issues(sentiment: dict, pacing: dict, character: dict = None, genre: str = "drama") -> list[PlotIssue]:
     issues = []
     chunks = sentiment["chunks"]
     n = len(chunks)
@@ -239,22 +239,36 @@ def detect_plot_issues(sentiment: dict, pacing: dict, character: dict = None) ->
     # 1. Tonal whiplash — momentum spikes > 1.0
     for m in pacing.get("momentum_timeline", []):
         if abs(m["delta"]) > 1.0:
-            issues.append(PlotIssue(
-                issue_type="tonal_whiplash", severity="warning",
-                description=f"Extreme tonal shift (Δ{m['delta']:+.2f}) at chunk {m['chunk_id']} — audience may feel jarred.",
-                affected_chunks=[m["chunk_id"]],
-                suggestion="Add a transitional beat before this shift to prepare the audience emotionally."
-            ))
+            is_climax = (m["chunk_id"] / max(n, 1)) >= 0.75
+            if is_climax:
+                issues.append(PlotIssue(
+                    issue_type="climactic_volatility", severity="info",
+                    description=f"High emotional volatility (Δ{m['delta']:+.2f}) at chunk {m['chunk_id']} — typical for a climax.",
+                    affected_chunks=[m["chunk_id"]],
+                    suggestion="Verify this aligns with the main battle or final confrontation. High volatility here is usually a strength."
+                ))
+            else:
+                issues.append(PlotIssue(
+                    issue_type="tonal_whiplash", severity="warning",
+                    description=f"Extreme tonal shift (Δ{m['delta']:+.2f}) at chunk {m['chunk_id']} — audience may feel jarred.",
+                    affected_chunks=[m["chunk_id"]],
+                    suggestion="Add a transitional beat before this shift to prepare the audience emotionally."
+                ))
 
     # 2. Unresolved tension — debt doesn't discharge by end
     debt_curve = pacing.get("tension_debt_curve", [])
     if debt_curve and debt_curve[-1] > 0.3:
-        issues.append(PlotIssue(
-            issue_type="unresolved_tension", severity="warning",
-            description=f"Tension debt is {debt_curve[-1]:.2f} at film end — audience may feel emotionally unsatisfied.",
-            affected_chunks=[chunks[-1]["chunk_id"]],
-            suggestion="Add a darker or more intense scene near the end to discharge accumulated tension debt."
-        ))
+        # Check if we had a climax discharge recently (meaning this is just a long epilogue)
+        climax_period = debt_curve[int(n*0.7):] if n >= 5 else []
+        major_discharge_happened = any(d < 0.1 for d in climax_period)
+        
+        if not major_discharge_happened:
+            issues.append(PlotIssue(
+                issue_type="unresolved_tension", severity="warning",
+                description=f"Tension debt is {debt_curve[-1]:.2f} at film end — audience may feel emotionally unsatisfied.",
+                affected_chunks=[chunks[-1]["chunk_id"]],
+                suggestion="Add a darker or more intense scene near the end to discharge accumulated tension debt."
+            ))
 
     # 3. Missing Act 2 conflict
     if n >= 6:
@@ -285,11 +299,15 @@ def detect_plot_issues(sentiment: dict, pacing: dict, character: dict = None) ->
     if peak_tension and n >= 6:
         pos = next((i for i, c in enumerate(chunks) if c["chunk_id"] == peak_tension), 0)
         if pos < n * 0.2:
+            is_epic = any(g in genre.lower() for g in ["epic", "action", "sequel"])
+            severity = "info" if is_epic else "warning"
+            sug = "For sequels or epics starting in media res, this is acceptable. Otherwise, build tension more gradually." if is_epic else "Build tension more gradually. Save the darkest moment for 65-80% into the story."
+            
             issues.append(PlotIssue(
-                issue_type="front_loaded_drama", severity="warning",
-                description=f"Peak tension is at chunk {peak_tension} ({pos/n:.0%} into the film) — too early.",
+                issue_type="front_loaded_drama", severity=severity,
+                description=f"Peak tension is at chunk {peak_tension} ({pos/n:.0%} into the film) — extremely early.",
                 affected_chunks=[peak_tension],
-                suggestion="Build tension more gradually. Save the darkest moment for 65-80% into the story."
+                suggestion=sug
             ))
 
     # 6. Repetitive emotions (4+ consecutive same dominant)
@@ -362,11 +380,11 @@ def compute_screenplay_score(
     dialogue_score = 8.0
     for dc in dialogue_critiques:
         if dc.severity == "warning" and dc.issue_type == "clunky":
-            dialogue_score -= 0.5
+            dialogue_score -= 0.2  # Reduced penalty (was 0.5)
         elif dc.severity == "warning" and dc.issue_type == "repetitive":
             dialogue_score -= 0.3
         elif dc.severity == "praise":
-            dialogue_score += 0.2
+            dialogue_score += 0.3  # Increased reward (was 0.2)
     dialogue_score = max(1.0, min(10.0, dialogue_score))
 
     # 4. Structure (25%)
@@ -413,7 +431,7 @@ def generate_verdict(
         if dc.severity != "praise"
     )[:500] or "Dialogue is generally strong."
 
-    prompt = f"""You are a professional screenplay analyst writing a studio coverage report for "{film_title}" ({genre}).
+    prompt = f"""You are a highly perceptive and nuanced cinematic analyst writing a final verdict for "{film_title}" ({genre}).
 
 ANALYSIS DATA:
 - Screenplay Score: {score}/10
@@ -429,8 +447,8 @@ DIALOGUE ISSUES:
 {dialogue_text}
 
 Generate:
-1. A 2-3 sentence professional verdict (like a studio reader's assessment)
-2. Exactly 3 specific, actionable fixes ranked by impact
+1. A 2-3 sentence nuanced verdict. Do NOT just read the numbers and say "it is flawed." Interpret the data through the lens of the film's genre (e.g., an Epic finale SHOULD have extreme shifts; high word counts aren't always bad). Write a thoughtful assessment of its narrative flow.
+2. Exactly 3 specific, actionable fixes ranked by impact. Focus on deep structural or character adjustments, not generic platitudes.
 
 Return ONLY valid JSON:
 {{
@@ -537,7 +555,7 @@ def generate_critique(
 
     # Step 5: Plot issues
     if verbose: print(f"  🔍 Detecting structural issues...", end=" ", flush=True)
-    plot_issues = detect_plot_issues(sentiment, pacing, character)
+    plot_issues = detect_plot_issues(sentiment, pacing, character, genre)
     if verbose:
         crit = sum(1 for p in plot_issues if p.severity == "critical")
         warn = sum(1 for p in plot_issues if p.severity == "warning")
