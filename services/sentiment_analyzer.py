@@ -203,7 +203,33 @@ def _call_micro(lines: list[str], film_title: str) -> Optional[list[dict]]:
             parsed = json.loads(raw)
             # Groq with json_object sometimes wraps in a key
             if isinstance(parsed, dict):
-                parsed = parsed.get("lines") or parsed.get("results") or list(parsed.values())[0]
+                # Try known keys first, then search for any list value
+                if isinstance(parsed.get("lines"), list):
+                    parsed = parsed["lines"]
+                elif isinstance(parsed.get("results"), list):
+                    parsed = parsed["results"]
+                else:
+                    # Find the first value that's a list
+                    found_list = False
+                    for v in parsed.values():
+                        if isinstance(v, list):
+                            parsed = v
+                            found_list = True
+                            break
+                    if not found_list:
+                        # Check if keys are string indices: {"0": {...}, "1": {...}, ...}
+                        if all(k.isdigit() and isinstance(v, dict) for k, v in parsed.items()):
+                            parsed = [
+                                {**v, "index": int(k)} for k, v in sorted(parsed.items(), key=lambda x: int(x[0]))
+                            ]
+                        elif all(k in parsed for k in ("emotion", "intensity")):
+                            parsed = [parsed]  # single result returned unwrapped
+                        else:
+                            print(f"    [Micro L2] Unexpected response structure: {list(parsed.keys())[:5]}")
+                            return None
+            if not isinstance(parsed, list):
+                print(f"    [Micro L2] Response is not a list: {type(parsed)}")
+                return None
             return parsed
         except Exception as e:
             print(f"    [Micro L2] Attempt {attempt+1} failed: {e}")
@@ -284,29 +310,70 @@ def _compute_trajectory(line_sentiments: list[LineSentiment]) -> Optional[Trajec
 
 
 # ── Keyword Fallback (no API) ─────────────────────────────────────────────────
-_NEG = {"kill","die","death","murder","blood","fight","war","hate","rage",
-        "attack","destroy","enemy","pain","suffer","afraid","fear","evil",
-        "prison","punish","beaten","monster","betrayal","anger","grief"}
-_POS = {"love","happy","joy","laugh","smile","friend","together","hope",
-        "victory","win","celebrate","free","beautiful","safe","dance",
-        "thank","trust","family","protect","brave","proud","cheer","unite"}
+_NEG = {"kill","kills","killed","killing","die","died","dies","death","dead",
+        "murder","blood","bloody","fight","fighting","war","hate","hated",
+        "rage","attack","attacked","destroy","destroyed","enemy","enemies",
+        "pain","painful","suffer","suffering","afraid","fear","feared",
+        "evil","prison","prisoner","punish","punished","beaten","beat",
+        "monster","betrayal","betrayed","anger","angry","grief","grieve",
+        "hurt","wound","wounded","weapon","sword","gun","shoot","shot",
+        "threat","threaten","danger","dangerous","cruel","cruelty",
+        "arrest","captured","torture","scream","screamed","crying","tears",
+        "sacrifice","stolen","slave","oppression","oppress","violent",
+        "revenge","avenge","burn","burning","drown","trap","trapped",
+        "lost","lose","losing","broke","broken","sorrow","misery",
+        "darkness","dark","terror","horrify","shock","chains","whip"}
+_POS = {"love","loved","loves","loving","happy","happiness","joy","joyful",
+        "laugh","laughed","laughing","smile","smiled","smiling","friend",
+        "friends","friendship","together","hope","hopeful","hoping",
+        "victory","victorious","win","winning","won","celebrate","celebrating",
+        "free","freedom","beautiful","beauty","safe","safely","dance","dancing",
+        "thank","thankful","thanks","trust","trusted","family","protect",
+        "protecting","brave","bravery","proud","pride","cheer","cheering",
+        "unite","united","unity","warm","warmth","kind","kindness",
+        "welcome","gentle","peace","peaceful","comfort","embrace",
+        "gift","blessing","blessed","dear","darling","precious",
+        "wonderful","amazing","delight","delighted","pleased","pleasure",
+        "rescue","saved","saving","glory","glorious","honour","hero",
+        "brothers","brother","sister","mother","heart","care","caring"}
 
 def _fast_score_chunk(text: str) -> dict:
     words   = text.lower().split()
-    total   = max(len(words) * 0.08, 1)
-    neg     = sum(1 for w in words if w.strip(".,!?") in _NEG)
-    pos     = sum(1 for w in words if w.strip(".,!?") in _POS)
-    score   = max(-1.0, min(1.0, (pos - neg) / total))
+    neg     = sum(1 for w in words if w.strip(".,!?\"'()") in _NEG)
+    pos     = sum(1 for w in words if w.strip(".,!?\"'()") in _POS)
+    matched = neg + pos
+    if matched == 0:
+        raw_score = 0.0
+    else:
+        # ratio: what fraction of emotional words are positive vs negative
+        ratio = (pos - neg) / matched            # -1.0 to +1.0
+        # density: what fraction of all words are emotional (0 to 1)
+        density = min(matched / max(len(words), 1), 0.5) * 2  # scale up, cap at 1.0
+        raw_score = ratio * max(density, 0.3)    # floor density at 0.3 so even sparse matches register
+    score   = round(max(-1.0, min(1.0, raw_score)), 3)
     label   = ("Joyful" if score > 0.3 else "Hopeful" if score > 0.0
-                else "Neutral" if score > -0.3 else "Tense" if score > -0.6
-                else "Climactic")
-    dom     = "joy" if score > 0 else "fear" if score > -0.5 else "anger"
+                else "Neutral" if score > -0.1 else "Tense" if score > -0.4
+                else "Sorrowful" if score > -0.7 else "Wrathful")
+    dom     = ("joy" if score > 0.3 else "trust" if score > 0.0
+               else "surprise" if score > -0.1 else "fear" if score > -0.4
+               else "sadness" if score > -0.7 else "anger")
+    # Build emotion distribution based on score
+    neg_intensity = max(0, -score)
+    pos_intensity = max(0, score)
     return {
-        "score": round(score, 3), "label": label,
+        "score": score, "label": label,
         "dominant_emotion": dom,
-        "emotions": {e: round(max(0, -score if e in ["anger","fear","sadness","disgust"] else score) * 0.5, 2)
-                     for e in PLUTCHIK_EMOTIONS},
-        "reasoning": f"Keyword: {pos} positive, {neg} negative"
+        "emotions": {
+            "joy":          round(pos_intensity * 0.8, 2),
+            "trust":        round(pos_intensity * 0.5, 2),
+            "anticipation": round(abs(score) * 0.3, 2),
+            "surprise":     round(0.2 if abs(score) < 0.3 else 0.1, 2),
+            "fear":         round(neg_intensity * 0.6, 2),
+            "sadness":      round(neg_intensity * 0.7, 2),
+            "disgust":      round(neg_intensity * 0.3, 2),
+            "anger":        round(neg_intensity * 0.8, 2),
+        },
+        "reasoning": f"Keyword: {pos} positive, {neg} negative out of {len(words)} words"
     }
 
 

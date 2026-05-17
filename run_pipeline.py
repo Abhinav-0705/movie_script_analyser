@@ -1,7 +1,8 @@
 """
 run_pipeline.py
 ----------------
-Runs the full MS-1 → MS-3 → MS-4 pipeline on a given SRT file.
+Runs the full MS-1 → MS-3 → MS-4 → MS-5 pipeline on a given SRT file.
+MS-2 (character extraction) runs separately — feed character_output.json manually.
 Usage:
   python3 run_pipeline.py                      # first half of RRR (chunks 1-18)
   python3 run_pipeline.py --chunks 36          # full film
@@ -16,13 +17,14 @@ sys.path.insert(0, ROOT)
 from srt_parser        import parse_srt, assign_scene_chunks, get_dialogue_only, get_scene_chunk_texts
 from services.sentiment_analyzer import analyze_sentiment, timeline_to_dict
 from services.pacing_detector    import detect_pacing, report_to_dict
+from services.critique_engine    import generate_critique, report_to_dict as critique_to_dict
 
 SRT_FILE   = os.path.join(ROOT, "RRR 2022 JPN UHD en full.srt")
 FILM_TITLE = "RRR"
 GENRE      = "action/epic"
 
 def run(max_chunks: int = 18, use_llm: bool = True, run_micro: bool = True,
-        user_climax_chunk: int = None):
+        user_climax_chunk: int = None, run_critique: bool = True):
     t0 = time.time()
 
     # ── MS-1: Parse SRT ──────────────────────────────────────────────────────
@@ -44,6 +46,14 @@ def run(max_chunks: int = 18, use_llm: bool = True, run_micro: bool = True,
     print(f"  Total dialogue lines : {len(dialogue)}")
     print(f"  Chunks selected      : {len(chunks)} of {max(all_chunks)} "
           f"(first {max_chunks * 5} min)")
+
+    # Check if character_output.json exists (MS-2 runs separately to save API calls)
+    char_path = os.path.join(ROOT, "character_output.json")
+    if os.path.exists(char_path):
+        print(f"  📂 Character data found → character_output.json")
+    else:
+        char_path = None
+        print(f"  ℹ️  No character data (run MS-2 separately if needed)")
 
     # ── MS-3: Sentiment Analysis ──────────────────────────────────────────────
     timeline = analyze_sentiment(
@@ -76,6 +86,22 @@ def run(max_chunks: int = 18, use_llm: bool = True, run_micro: bool = True,
     with open(pac_path, "w") as f:
         json.dump(pac_dict, f, indent=2)
     print(f"  💾 Pacing saved  → pacing_output.json")
+
+    # ── MS-5: Critique Engine ─────────────────────────────────────────────────
+    critique = None
+    if run_critique:
+        crit_path = os.path.join(ROOT, "critique_output.json")
+        critique = generate_critique(
+            sentiment_path = sent_path,
+            pacing_path    = pac_path,
+            character_path = char_path,
+            film_title     = FILM_TITLE,
+            genre          = GENRE,
+            verbose        = True
+        )
+        with open(crit_path, "w") as f:
+            json.dump(critique_to_dict(critique), f, indent=2)
+        print(f"  💾 Critique saved → critique_output.json")
 
     # ── Final Summary ─────────────────────────────────────────────────────────
     elapsed = time.time() - t0
@@ -138,11 +164,14 @@ if __name__ == "__main__":
                     help="Use keyword mode instead of LLM (no API needed)")
     ap.add_argument("--no-micro", action="store_true",
                     help="Skip line-level micro analysis (faster)")
+    ap.add_argument("--no-critique", action="store_true",
+                    help="Skip MS-5 critique engine")
     args = ap.parse_args()
 
     run(
         max_chunks        = args.chunks,
         use_llm           = not args.fast,
         run_micro         = not args.no_micro,
-        user_climax_chunk = args.climax
+        user_climax_chunk = args.climax,
+        run_critique      = not args.no_critique
     )
