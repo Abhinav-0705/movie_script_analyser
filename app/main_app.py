@@ -282,9 +282,27 @@ with st.expander("✍️ Style Transfer Panel (Rewrite a Scene)"):
         st.write("") # spacing
         st.write("")
         st.write("")
-        if st.button("Rewrite Scene (Mock)"):
-            import style_transfer_prompts as stp
-            st.toast("Style Transfer triggered!")
-            prompt = getattr(stp, f"PROMPT_{list(['Anurag Kashyap', 'Imtiaz Ali', 'Mani Ratnam']).index(director)+1}_{director.replace(' ', '_').upper()}")
-            st.code(prompt, language="text")
-            st.info("Backend integration for style transfer would run here using the selected prompt and chunk text.")
+        if st.button("Rewrite Scene (Using Groq)"):
+            with st.spinner(f"Rewriting Chunk {chunk_sel} as {director}..."):
+                # 1. Fetch prompt
+                import style_transfer_prompts as stp
+                prompt_name = f"PROMPT_{list(['Anurag Kashyap', 'Imtiaz Ali', 'Mani Ratnam']).index(director)+1}_{director.replace(' ', '_').upper()}"
+                base_prompt = getattr(stp, prompt_name)
+                
+                # 2. Re-extract chunk text from SRT
+                import srt_parser
+                subs = srt_parser.parse_srt(run_pipeline.SRT_FILE)
+                subs = srt_parser.assign_scene_chunks(subs, chunk_minutes=5)
+                dialogue = srt_parser.get_dialogue_only(subs)
+                all_chunks = srt_parser.get_scene_chunk_texts(dialogue)
+                chunk_text = all_chunks.get(chunk_sel, "")
+                
+                if not chunk_text:
+                    st.error("Could not extract text for this chunk.")
+                else:
+                    # 3. Call MS-7 service
+                    import services.style_transfer as st_service
+                    result = st_service.rewrite_scene(base_prompt, chunk_text)
+                    st.success("Scene Rewritten Successfully!")
+                    st.markdown("### 🎬 Rewritten Scene")
+                    st.text_area("Screenplay", value=result, height=400)
