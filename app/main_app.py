@@ -63,6 +63,8 @@ if "pacing_data" not in st.session_state:
     st.session_state.pacing_data = None
 if "critique_data" not in st.session_state:
     st.session_state.critique_data = None
+if "current_srt" not in st.session_state:
+    st.session_state.current_srt = None
 
 
 # ── Data Loading Helpers ──────────────────────────────────────────────────────
@@ -101,13 +103,14 @@ with st.sidebar:
     
     if st.button("🚀 Run Analysis", type="primary", use_container_width=True):
         if uploaded_file is not None:
-            # Save uploaded file to temp path
-            temp_path = os.path.join(ROOT, "app_temp.srt")
-            with open(temp_path, "wb") as f:
+            # Save uploaded file to persistent path for this session
+            upload_path = os.path.join(ROOT, "current_upload.srt")
+            with open(upload_path, "wb") as f:
                 f.write(uploaded_file.getbuffer())
                 
             # Temporarily patch the pipeline SRT_FILE
-            run_pipeline.SRT_FILE = temp_path
+            run_pipeline.SRT_FILE = upload_path
+            st.session_state.current_srt = upload_path
             
             with st.spinner("Analyzing Script... (this may take a few minutes if LLM is enabled)"):
                 t0 = time.time()
@@ -122,7 +125,7 @@ with st.sidebar:
                 
             refresh_data()
             st.success(f"Analysis Complete! ({elapsed:.1f}s)")
-            os.remove(temp_path)
+            # Removed os.remove(temp_path) so Style Transfer can use it later
         else:
             st.warning("Please upload a .srt file first.")
 
@@ -397,7 +400,13 @@ with st.expander("✍️ Style Transfer Panel (Rewrite a Scene)"):
                 
                 # 2. Re-extract chunk text from SRT
                 import srt_parser
-                subs = srt_parser.parse_srt(run_pipeline.SRT_FILE)
+                
+                # Use the uploaded SRT if available, else default to RRR
+                srt_to_parse = st.session_state.current_srt or os.path.join(ROOT, "RRR 2022 JPN UHD en full.srt")
+                if not os.path.exists(srt_to_parse):
+                    srt_to_parse = os.path.join(ROOT, "RRR 2022 JPN UHD en full.srt")
+                    
+                subs = srt_parser.parse_srt(srt_to_parse)
                 subs = srt_parser.assign_scene_chunks(subs, chunk_minutes=5)
                 dialogue = srt_parser.get_dialogue_only(subs)
                 all_chunks = srt_parser.get_scene_chunk_texts(dialogue)
