@@ -388,7 +388,7 @@ valence score  emotion per line
 
 ## 👥 Team
 
-Built for the **GenAI NLP System Building Challenge Hackathon** — 3 days, 2 people.
+Built for the **GenAI NLP System Building Challenge Hackathon** by Abhinav, Yogansh and Vikhyath (iREL Summer Bootcamp)
 
 ---
 
