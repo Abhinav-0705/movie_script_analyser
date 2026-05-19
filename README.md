@@ -44,14 +44,14 @@ User uploads .srt / .txt file
        └────────────┬────────────┘
                     ▼
 ╔══════════════════════════════════╗
-║  MS-4: Conflict & Pacing         ║  🔜 IN PROGRESS
+║  MS-4: Conflict & Pacing         ║  ✅ IMPLEMENTED
 ║  Detector                        ║
 ║  services/pacing_detector.py     ║
 ╚══════════════════╤═══════════════╝
                    │
                    ▼
 ╔══════════════════════════════════╗
-║  MS-5: Screenplay Critique       ║  🔜 PLANNED
+║  MS-5: Screenplay Critique       ║  ✅ IMPLEMENTED
 ║  Engine (LLM)                    ║
 ║  services/critique_engine.py     ║
 ╚══════════════════╤═══════════════╝
@@ -59,10 +59,16 @@ User uploads .srt / .txt file
       ┌────────────┴────────────┐
       ▼                         ▼
 ╔══════════════════╗  ╔═════════════════════════════╗
-║  MS-6: Visual    ║  ║  MS-7: Style Transfer        ║  🔜 PLANNED
-║  Dashboard       ║  ║  Engine (Bonus)              ║
+║  MS-6: Visual    ║  ║  MS-7: Style Transfer        ║  ✅ IMPLEMENTED
+║  Dashboard       ║  ║  Engine                      ║
 ║  app/main_app.py ║  ║  services/style_transfer.py  ║
 ╚══════════════════╝  ╚═════════════════════════════╝
+          │
+          ▼
+╔══════════════════════════════════╗
+║  Phase 4: FastAPI REST API       ║  ✅ IMPLEMENTED
+║  api/server.py                   ║
+╚══════════════════════════════════╝
 ```
 
 ---
@@ -169,10 +175,10 @@ Three full prompts using real RRR scenes are ready to paste into any LLM.
 
 ---
 
-## 🔜 Planned Microservices
+## ✅ Implemented — All Microservices Complete
 
 ### MS-4: Conflict & Pacing Detector
-**File:** `services/pacing_detector.py` *(next to build)*
+**File:** `services/pacing_detector.py`
 
 Consumes `SentimentTimeline` from MS-3 and applies rule-based analysis:
 - **Flat Zone Detection** — 3+ consecutive chunks with `|score| < 0.2` → "Scene lacks tension"
@@ -180,6 +186,7 @@ Consumes `SentimentTimeline` from MS-3 and applies rule-based analysis:
 - **Act Break Detection** — sharp sentiment shifts mark likely Act 1→2→3 transitions
 - **Climax Validation** — checks if peak tension falls in the final third (as expected)
 - **Pacing Score** — variance of sentiment scores (low variance = monotonous film)
+- **3 Innovative Features:** Ideal Pacing Curve comparison, Tension Debt Accumulator, Narrative Momentum
 
 ### MS-5: Screenplay Critique Engine
 **File:** `services/critique_engine.py`
@@ -203,17 +210,19 @@ Streamlit web interface:
 - 📝 **Critique Report Cards** — Critical 🔴 / Warning ⚠️ / Good ✅
 - ✍️ **Style Transfer Panel** — select scene + director → get rewrite
 
-### MS-4 FastAPI Wrapper (Phase 4)
+### Phase 4: FastAPI REST API
 **File:** `api/server.py`
 
-Wrap all services as REST endpoints:
+All services wrapped as REST endpoints with auto-generated Swagger docs:
 ```
-POST /api/extract-scenes
-POST /api/extract-characters
-POST /api/analyze-sentiment
-POST /api/detect-pacing
-POST /api/critique
-POST /api/style-transfer
+GET  /health                  → Health check
+POST /api/extract-scenes      → MS-1 Scene Extractor
+POST /api/extract-characters  → MS-2 Character Extractor
+POST /api/analyze-sentiment   → MS-3 Sentiment Analyzer
+POST /api/detect-pacing       → MS-4 Pacing Detector
+POST /api/critique            → MS-5 Critique Engine
+POST /api/style-transfer      → MS-7 Style Transfer
+POST /api/run-pipeline        → Full pipeline (MS-1→5)
 ```
 
 ---
@@ -268,14 +277,15 @@ python3 srt_parser.py "your_movie.srt"
 python3 services/character_extractor.py
 ```
 
-### Phase 2 — Streamlit UI *(coming soon)*
+### Phase 2 — Streamlit UI
 ```bash
 streamlit run app/main_app.py
 ```
 
-### Phase 4 — FastAPI *(coming soon)*
+### Phase 4 — FastAPI REST API
 ```bash
 uvicorn api.server:app --reload
+# Swagger docs available at: http://127.0.0.1:8000/docs
 ```
 
 ---
@@ -290,18 +300,20 @@ movie_script_analyser/
 ├── services/
 │   ├── character_extractor.py       # MS-2: Speaker attribution ✅
 │   ├── sentiment_analyzer.py        # MS-3: Two-layer emotion analysis ✅
-│   ├── pacing_detector.py           # MS-4: Conflict & pacing 🔜
-│   ├── critique_engine.py           # MS-5: LLM critique 🔜
-│   └── style_transfer.py            # MS-7: Director rewriter 🔜
+│   ├── pacing_detector.py           # MS-4: Conflict & pacing ✅
+│   ├── critique_engine.py           # MS-5: LLM critique ✅
+│   └── style_transfer.py            # MS-7: Director rewriter ✅
 │
 ├── app/
-│   └── main_app.py                  # MS-6: Streamlit dashboard 🔜
+│   └── main_app.py                  # MS-6: Streamlit dashboard ✅
 │
 ├── api/
-│   └── server.py                    # FastAPI endpoints (Phase 4) 🔜
+│   ├── __init__.py
+│   └── server.py                    # FastAPI REST API (Phase 4) ✅
 │
 ├── style_transfer_prompts.py        # Director style prompt library ✅
-├── sentiment_output.json            # Sample output from MS-3 on RRR
+├── run_pipeline.py                  # Pipeline orchestrator ✅
+├── sentiment_output.json            # Sample output from MS-3
 │
 ├── requirements.txt
 ├── .env.example
@@ -376,7 +388,7 @@ valence score  emotion per line
 
 ## 👥 Team
 
-Built for the **GenAI NLP System Building Challenge Hackathon** — 3 days, 2 people.
+Built for the **GenAI NLP System Building Challenge Hackathon** by Abhinav, Yogansh and Vikhyath (iREL Summer Bootcamp)
 
 ---
 
