@@ -32,7 +32,7 @@ from typing import Optional
 from groq import Groq
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv(override=True)
 
 # ── Two Groq clients — one per API key ──────────────────────────────────────
 # KEY 1 → Layer 1 (macro chunk analysis) — higher quality model

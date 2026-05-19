@@ -311,9 +311,9 @@ with col_hero:
         for chunk, stage in mapped_items:
             st.markdown(f"**Chunk {chunk}:** {stage}")
 
-# ── ROW 3: Score Breakdown + Character Arcs ───────────────────────────────────
+# ── ROW 3: Score Breakdown ────────────────────────────────────────────────────
 st.markdown("<hr>", unsafe_allow_html=True)
-col_radar, col_chars = st.columns([1, 2])
+col_empty1, col_radar, col_empty2 = st.columns([1, 2, 1])
 
 with col_radar:
     st.subheader("📊 Score Breakdown")
@@ -342,36 +342,13 @@ with col_radar:
                 angularaxis=dict(tickfont=dict(color='#eee'))
             ),
             template = "plotly_dark",
-            height   = 320,
+            height   = 380,
             margin   = dict(l=20, r=20, t=20, b=20),
             showlegend = False
         )
         st.plotly_chart(fig_radar, width='stretch')
     else:
         st.info("Score breakdown not available.")
-
-with col_chars:
-    st.subheader("👥 Character Arcs")
-    char_arcs = crit_data.get('character_arcs', [])
-    if char_arcs:
-        arc_color = {
-            "Transformational": "🟢",
-            "Flat":             "🟡",
-            "Tragic":           "🔴",
-            "Absent":           "⚫"
-        }
-        for arc in char_arcs:
-            badge = arc_color.get(arc.get('arc_type',''), "⚪")
-            pct   = int(arc.get('screen_presence', 0) * 100)
-            with st.container():
-                st.markdown(
-                    f"{badge} **{arc['name']}** — {arc['arc_type']} arc "
-                    f"| {arc.get('line_count',0)} lines | {pct}% screen presence"
-                )
-                st.caption(arc.get('emotional_journey', ''))
-                st.markdown("---")
-    else:
-        st.info("No character data — run MS-2 character extractor first.")
 
 # ── MS-7 STYLE TRANSFER PANEL (Bonus) ──
 st.markdown("<hr>", unsafe_allow_html=True)

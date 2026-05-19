@@ -1,16 +1,16 @@
 {
   "screenplay_score": 7.7,
   "score_breakdown": {
-    "pacing": 7.7,
+    "pacing": 7.3,
     "emotional_range": 9.0,
     "dialogue": 5.6,
-    "structure": 8.0
+    "structure": 8.5
   },
-  "overall_verdict": "Avengers: Endgame's narrative flow is a masterclass in balancing epic scope with emotional intimacy, though its frenetic pacing and clunky dialogue occasionally threaten to undermine the film's impact. The screenplay's structural issues, such as the extremely early peak tension, are largely mitigated by the film's genre demands and the audience's existing investment in the franchise. Ultimately, the film's ability to navigate its complex emotional landscape and deliver a satisfying conclusion is a testament to its narrative prowess.",
+  "overall_verdict": "Avengers: Endgame masterfully navigates the complexities of an epic finale, leveraging its high emotional volatility to create a captivating narrative flow that, despite some clunky dialogue, effectively propels the audience through its sprawling storyline. The film's pacing, while occasionally uneven, serves the genre's demands for intense action sequences and dramatic reveals. Ultimately, the movie's structural issues, such as the extremely early peak tension, are mitigated by its ability to maintain a strong average momentum.",
   "top_3_fixes": [
-    "Rebalance the pacing by introducing a more gradual tension build-up in the first act, potentially by recontextualizing the peak tension at chunk 2 to a more traditional midpoint or third-act climax",
-    "Streamline dialogue in key chunks (3, 7, 8, 9, 11, 13, 15, 16, 17, 20, 24) by reducing word count and focusing on character-driven interactions, rather than relying on exposition or clunky plot explanations",
-    "Introduce more nuanced character arcs for secondary characters, particularly in the film's climax (chunks 28, 29, 32), to create a more emotionally resonant and cohesive conclusion to the franchise"
+    "Rebalance the narrative to delay the peak tension beyond the 3% mark, potentially by introducing an engaging subplot or character arc that gradually builds tension throughout the early stages of the film",
+    "Implement a more nuanced dialogue system, focusing on concise and natural conversations that reveal character traits and relationships, rather than relying on clunky exposition or forced humor",
+    "Introduce a secondary antagonist or conflicting ideology within the Avengers team, creating a richer, more layered conflict that complements the primary villain and enhances the story's emotional range and character development"
   ],
   "character_arcs": [],
   "dialogue_critiques": [
@@ -137,132 +137,220 @@
       "suggestion": "For sequels or epics starting in media res, this is acceptable. Otherwise, build tension more gradually."
     }
   ],
-  "hero_journey_map": {},
+  "hero_journey_map": {
+    "Ordinary World": 1,
+    "Call to Adventure": 7,
+    "Refusal of the Call": null,
+    "Meeting the Mentor": 6,
+    "Crossing the Threshold": 9,
+    "Tests/Allies/Enemies": 16,
+    "The Ordeal": 20,
+    "The Reward": 28,
+    "The Road Back": 29,
+    "The Return": 32
+  },
   "pacing_flags": [
     {
       "chunk_id": 2,
       "type": "misplaced_peak",
       "severity": "warning",
       "critique": "Chunk 2: actual -0.80 vs ideal -0.02 (\u0394-0.78)",
-      "fix": "For a action/sci-fi film, this scene should feel more uplifting at this point in the story."
+      "fix": "For a action film, this scene should feel more uplifting at this point in the story."
     },
     {
       "chunk_id": 3,
       "type": "misplaced_peak",
       "severity": "warning",
       "critique": "Chunk 3: actual -0.80 vs ideal -0.14 (\u0394-0.66)",
-      "fix": "For a action/sci-fi film, this scene should feel more uplifting at this point in the story."
+      "fix": "For a action film, this scene should feel more uplifting at this point in the story."
     },
     {
       "chunk_id": 4,
       "type": "misplaced_peak",
       "severity": "warning",
       "critique": "Chunk 4: actual -0.80 vs ideal -0.26 (\u0394-0.54)",
-      "fix": "For a action/sci-fi film, this scene should feel more uplifting at this point in the story."
+      "fix": "For a action film, this scene should feel more uplifting at this point in the story."
     },
     {
       "chunk_id": 6,
       "type": "misplaced_peak",
       "severity": "warning",
       "critique": "Chunk 6: actual +0.20 vs ideal -0.37 (\u0394+0.57)",
-      "fix": "For a action/sci-fi film, this scene should feel darker at this point in the story."
+      "fix": "For a action film, this scene should feel darker at this point in the story."
     },
     {
       "chunk_id": 7,
       "type": "misplaced_peak",
       "severity": "warning",
       "critique": "Chunk 7: actual +0.30 vs ideal -0.41 (\u0394+0.71)",
-      "fix": "For a action/sci-fi film, this scene should feel darker at this point in the story."
+      "fix": "For a action film, this scene should feel darker at this point in the story."
     },
     {
       "chunk_id": 9,
       "type": "misplaced_peak",
       "severity": "warning",
       "critique": "Chunk 9: actual +0.20 vs ideal -0.49 (\u0394+0.69)",
-      "fix": "For a action/sci-fi film, this scene should feel darker at this point in the story."
+      "fix": "For a action film, this scene should feel darker at this point in the story."
     },
     {
       "chunk_id": 10,
       "type": "misplaced_peak",
       "severity": "warning",
       "critique": "Chunk 10: actual +0.30 vs ideal -0.46 (\u0394+0.76)",
-      "fix": "For a action/sci-fi film, this scene should feel darker at this point in the story."
+      "fix": "For a action film, this scene should feel darker at this point in the story."
     },
     {
       "chunk_id": 11,
       "type": "misplaced_peak",
       "severity": "warning",
       "critique": "Chunk 11: actual +0.30 vs ideal -0.39 (\u0394+0.69)",
-      "fix": "For a action/sci-fi film, this scene should feel darker at this point in the story."
+      "fix": "For a action film, this scene should feel darker at this point in the story."
     },
     {
       "chunk_id": 12,
       "type": "misplaced_peak",
       "severity": "warning",
       "critique": "Chunk 12: actual +0.20 vs ideal -0.33 (\u0394+0.53)",
-      "fix": "For a action/sci-fi film, this scene should feel darker at this point in the story."
+      "fix": "For a action film, this scene should feel darker at this point in the story."
     },
     {
       "chunk_id": 16,
       "type": "misplaced_peak",
       "severity": "warning",
       "critique": "Chunk 16: actual +0.20 vs ideal -0.42 (\u0394+0.62)",
-      "fix": "For a action/sci-fi film, this scene should feel darker at this point in the story."
+      "fix": "For a action film, this scene should feel darker at this point in the story."
     },
     {
       "chunk_id": 19,
       "type": "misplaced_peak",
       "severity": "warning",
       "critique": "Chunk 19: actual +0.20 vs ideal -0.46 (\u0394+0.66)",
-      "fix": "For a action/sci-fi film, this scene should feel darker at this point in the story."
+      "fix": "For a action film, this scene should feel darker at this point in the story."
     },
     {
       "chunk_id": 21,
       "type": "misplaced_peak",
       "severity": "warning",
       "critique": "Chunk 21: actual +0.20 vs ideal -0.32 (\u0394+0.52)",
-      "fix": "For a action/sci-fi film, this scene should feel darker at this point in the story."
+      "fix": "For a action film, this scene should feel darker at this point in the story."
     },
     {
       "chunk_id": 25,
       "type": "misplaced_peak",
       "severity": "warning",
       "critique": "Chunk 25: actual +0.20 vs ideal -0.81 (\u0394+1.01)",
-      "fix": "For a action/sci-fi film, this scene should feel darker at this point in the story."
+      "fix": "For a action film, this scene should feel darker at this point in the story."
     },
     {
       "chunk_id": 28,
       "type": "misplaced_peak",
       "severity": "warning",
       "critique": "Chunk 28: actual +0.80 vs ideal -0.56 (\u0394+1.36)",
-      "fix": "For a action/sci-fi film, this scene should feel darker at this point in the story."
+      "fix": "For a action film, this scene should feel darker at this point in the story."
     },
     {
       "chunk_id": 30,
       "type": "misplaced_peak",
       "severity": "warning",
       "critique": "Chunk 30: actual -0.80 vs ideal -0.21 (\u0394-0.59)",
-      "fix": "For a action/sci-fi film, this scene should feel more uplifting at this point in the story."
+      "fix": "For a action film, this scene should feel more uplifting at this point in the story."
     },
     {
       "chunk_id": 31,
       "type": "misplaced_peak",
       "severity": "warning",
       "critique": "Chunk 31: actual -0.80 vs ideal -0.01 (\u0394-0.79)",
-      "fix": "For a action/sci-fi film, this scene should feel more uplifting at this point in the story."
+      "fix": "For a action film, this scene should feel more uplifting at this point in the story."
     },
     {
       "chunk_id": 32,
       "type": "misplaced_peak",
       "severity": "warning",
       "critique": "Chunk 32: actual +0.80 vs ideal +0.20 (\u0394+0.60)",
-      "fix": "For a action/sci-fi film, this scene should feel darker at this point in the story."
+      "fix": "For a action film, this scene should feel darker at this point in the story."
+    },
+    {
+      "chunk_id": 12,
+      "type": "tension_debt",
+      "severity": "warning",
+      "critique": "Tension debt = 1.20 \u2014 7 consecutive calm chunks",
+      "fix": "Introduce a conflict, obstacle, or revelation in the next scene to discharge audience tension debt"
+    },
+    {
+      "chunk_id": 13,
+      "type": "tension_debt",
+      "severity": "warning",
+      "critique": "Tension debt = 1.40 \u2014 8 consecutive calm chunks",
+      "fix": "Introduce a conflict, obstacle, or revelation in the next scene to discharge audience tension debt"
+    },
+    {
+      "chunk_id": 14,
+      "type": "tension_debt",
+      "severity": "warning",
+      "critique": "Tension debt = 1.60 \u2014 9 consecutive calm chunks",
+      "fix": "Introduce a conflict, obstacle, or revelation in the next scene to discharge audience tension debt"
+    },
+    {
+      "chunk_id": 15,
+      "type": "tension_debt",
+      "severity": "warning",
+      "critique": "Tension debt = 1.60 \u2014 10 consecutive calm chunks",
+      "fix": "Introduce a conflict, obstacle, or revelation in the next scene to discharge audience tension debt"
     },
     {
       "chunk_id": 16,
       "type": "tension_debt",
       "severity": "warning",
-      "critique": "Tension debt = 1.35 \u2014 11 consecutive calm chunks",
+      "critique": "Tension debt = 1.80 \u2014 11 consecutive calm chunks",
+      "fix": "Introduce a conflict, obstacle, or revelation in the next scene to discharge audience tension debt"
+    },
+    {
+      "chunk_id": 17,
+      "type": "tension_debt",
+      "severity": "warning",
+      "critique": "Tension debt = 1.80 \u2014 12 consecutive calm chunks",
+      "fix": "Introduce a conflict, obstacle, or revelation in the next scene to discharge audience tension debt"
+    },
+    {
+      "chunk_id": 18,
+      "type": "tension_debt",
+      "severity": "warning",
+      "critique": "Tension debt = 1.80 \u2014 13 consecutive calm chunks",
+      "fix": "Introduce a conflict, obstacle, or revelation in the next scene to discharge audience tension debt"
+    },
+    {
+      "chunk_id": 19,
+      "type": "tension_debt",
+      "severity": "warning",
+      "critique": "Tension debt = 2.00 \u2014 14 consecutive calm chunks",
+      "fix": "Introduce a conflict, obstacle, or revelation in the next scene to discharge audience tension debt"
+    },
+    {
+      "chunk_id": 20,
+      "type": "tension_debt",
+      "severity": "warning",
+      "critique": "Tension debt = 1.50 \u2014 0 consecutive calm chunks",
+      "fix": "Introduce a conflict, obstacle, or revelation in the next scene to discharge audience tension debt"
+    },
+    {
+      "chunk_id": 21,
+      "type": "tension_debt",
+      "severity": "warning",
+      "critique": "Tension debt = 1.70 \u2014 1 consecutive calm chunks",
+      "fix": "Introduce a conflict, obstacle, or revelation in the next scene to discharge audience tension debt"
+    },
+    {
+      "chunk_id": 22,
+      "type": "tension_debt",
+      "severity": "warning",
+      "critique": "Tension debt = 1.70 \u2014 2 consecutive calm chunks",
+      "fix": "Introduce a conflict, obstacle, or revelation in the next scene to discharge audience tension debt"
+    },
+    {
+      "chunk_id": 23,
+      "type": "tension_debt",
+      "severity": "warning",
+      "critique": "Tension debt = 1.20 \u2014 0 consecutive calm chunks",
       "fix": "Introduce a conflict, obstacle, or revelation in the next scene to discharge audience tension debt"
     },
     {
@@ -366,7 +454,7 @@
   ],
   "metadata": {
     "film_title": "Avengers: Endgame",
-    "genre": "action/sci-fi",
+    "genre": "action",
     "chunks_analyzed": 34
   }
 }

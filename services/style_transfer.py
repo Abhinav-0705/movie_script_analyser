@@ -9,7 +9,7 @@ def rewrite_scene(base_prompt: str, chunk_text: str) -> str:
     """
     from dotenv import load_dotenv
     load_dotenv(override=True)
-    api_key = os.getenv("GROQ_API_KEY_1") or os.getenv("GROQ_API_KEY_2")
+    api_key = os.getenv("GROQ_API_KEY_1") or os.getenv("GROQ_API_KEY_2") or os.getenv("GROQ_API_KEY_3") or os.getenv("GROQ_API_KEY_4")
     if not api_key:
         return "Error: Neither GROQ_API_KEY_1 nor GROQ_API_KEY_2 found in environment."
         

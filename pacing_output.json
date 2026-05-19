@@ -1,6 +1,6 @@
 {
-  "pacing_score": 7.67,
-  "tension_debt_peak": 1.35,
+  "pacing_score": 7.35,
+  "tension_debt_peak": 2.0,
   "avg_momentum": 0.464,
   "curve_deviation": 0.55,
   "flat_zones": [],
@@ -25,42 +25,53 @@
     29,
     32
   ],
-  "hero_journey_map": {},
+  "hero_journey_map": {
+    "Ordinary World": 1,
+    "Call to Adventure": 7,
+    "Refusal of the Call": null,
+    "Meeting the Mentor": 6,
+    "Crossing the Threshold": 9,
+    "Tests/Allies/Enemies": 16,
+    "The Ordeal": 20,
+    "The Reward": 28,
+    "The Road Back": 29,
+    "The Return": 32
+  },
   "tension_debt_curve": [
-    0.15,
-    0.0,
-    0.0,
-    0.0,
-    0.0,
-    0.15,
-    0.3,
-    0.3,
-    0.45,
-    0.6,
-    0.75,
-    0.9,
-    1.05,
-    1.2,
-    1.2,
-    1.35,
-    0.95,
-    0.95,
-    1.1,
-    0.7,
-    0.85,
-    0.85,
-    0.45,
-    0.05,
     0.2,
     0.0,
     0.0,
-    0.15,
     0.0,
     0.0,
+    0.2,
+    0.4,
+    0.4,
+    0.6,
+    0.8,
+    1.0,
+    1.2,
+    1.4,
+    1.6,
+    1.6,
+    1.8,
+    1.8,
+    1.8,
+    2.0,
+    1.5,
+    1.7,
+    1.7,
+    1.2,
+    0.7,
+    0.9,
+    0.4,
     0.0,
-    0.15,
-    0.3,
-    0.45
+    0.2,
+    0.2,
+    0.0,
+    0.0,
+    0.2,
+    0.4,
+    0.6
   ],
   "ideal_vs_actual": {
     "1": {
@@ -440,125 +451,202 @@
       "type": "misplaced_peak",
       "severity": "warning",
       "message": "Chunk 2: actual -0.80 vs ideal -0.02 (\u0394-0.78)",
-      "suggestion": "For a action/sci-fi film, this scene should feel more uplifting at this point in the story."
+      "suggestion": "For a action film, this scene should feel more uplifting at this point in the story."
     },
     {
       "chunk_id": 3,
       "type": "misplaced_peak",
       "severity": "warning",
       "message": "Chunk 3: actual -0.80 vs ideal -0.14 (\u0394-0.66)",
-      "suggestion": "For a action/sci-fi film, this scene should feel more uplifting at this point in the story."
+      "suggestion": "For a action film, this scene should feel more uplifting at this point in the story."
     },
     {
       "chunk_id": 4,
       "type": "misplaced_peak",
       "severity": "warning",
       "message": "Chunk 4: actual -0.80 vs ideal -0.26 (\u0394-0.54)",
-      "suggestion": "For a action/sci-fi film, this scene should feel more uplifting at this point in the story."
+      "suggestion": "For a action film, this scene should feel more uplifting at this point in the story."
     },
     {
       "chunk_id": 6,
       "type": "misplaced_peak",
       "severity": "warning",
       "message": "Chunk 6: actual +0.20 vs ideal -0.37 (\u0394+0.57)",
-      "suggestion": "For a action/sci-fi film, this scene should feel darker at this point in the story."
+      "suggestion": "For a action film, this scene should feel darker at this point in the story."
     },
     {
       "chunk_id": 7,
       "type": "misplaced_peak",
       "severity": "warning",
       "message": "Chunk 7: actual +0.30 vs ideal -0.41 (\u0394+0.71)",
-      "suggestion": "For a action/sci-fi film, this scene should feel darker at this point in the story."
+      "suggestion": "For a action film, this scene should feel darker at this point in the story."
     },
     {
       "chunk_id": 9,
       "type": "misplaced_peak",
       "severity": "warning",
       "message": "Chunk 9: actual +0.20 vs ideal -0.49 (\u0394+0.69)",
-      "suggestion": "For a action/sci-fi film, this scene should feel darker at this point in the story."
+      "suggestion": "For a action film, this scene should feel darker at this point in the story."
     },
     {
       "chunk_id": 10,
       "type": "misplaced_peak",
       "severity": "warning",
       "message": "Chunk 10: actual +0.30 vs ideal -0.46 (\u0394+0.76)",
-      "suggestion": "For a action/sci-fi film, this scene should feel darker at this point in the story."
+      "suggestion": "For a action film, this scene should feel darker at this point in the story."
     },
     {
       "chunk_id": 11,
       "type": "misplaced_peak",
       "severity": "warning",
       "message": "Chunk 11: actual +0.30 vs ideal -0.39 (\u0394+0.69)",
-      "suggestion": "For a action/sci-fi film, this scene should feel darker at this point in the story."
+      "suggestion": "For a action film, this scene should feel darker at this point in the story."
     },
     {
       "chunk_id": 12,
       "type": "misplaced_peak",
       "severity": "warning",
       "message": "Chunk 12: actual +0.20 vs ideal -0.33 (\u0394+0.53)",
-      "suggestion": "For a action/sci-fi film, this scene should feel darker at this point in the story."
+      "suggestion": "For a action film, this scene should feel darker at this point in the story."
     },
     {
       "chunk_id": 16,
       "type": "misplaced_peak",
       "severity": "warning",
       "message": "Chunk 16: actual +0.20 vs ideal -0.42 (\u0394+0.62)",
-      "suggestion": "For a action/sci-fi film, this scene should feel darker at this point in the story."
+      "suggestion": "For a action film, this scene should feel darker at this point in the story."
     },
     {
       "chunk_id": 19,
       "type": "misplaced_peak",
       "severity": "warning",
       "message": "Chunk 19: actual +0.20 vs ideal -0.46 (\u0394+0.66)",
-      "suggestion": "For a action/sci-fi film, this scene should feel darker at this point in the story."
+      "suggestion": "For a action film, this scene should feel darker at this point in the story."
     },
     {
       "chunk_id": 21,
       "type": "misplaced_peak",
       "severity": "warning",
       "message": "Chunk 21: actual +0.20 vs ideal -0.32 (\u0394+0.52)",
-      "suggestion": "For a action/sci-fi film, this scene should feel darker at this point in the story."
+      "suggestion": "For a action film, this scene should feel darker at this point in the story."
     },
     {
       "chunk_id": 25,
       "type": "misplaced_peak",
       "severity": "warning",
       "message": "Chunk 25: actual +0.20 vs ideal -0.81 (\u0394+1.01)",
-      "suggestion": "For a action/sci-fi film, this scene should feel darker at this point in the story."
+      "suggestion": "For a action film, this scene should feel darker at this point in the story."
     },
     {
       "chunk_id": 28,
       "type": "misplaced_peak",
       "severity": "warning",
       "message": "Chunk 28: actual +0.80 vs ideal -0.56 (\u0394+1.36)",
-      "suggestion": "For a action/sci-fi film, this scene should feel darker at this point in the story."
+      "suggestion": "For a action film, this scene should feel darker at this point in the story."
     },
     {
       "chunk_id": 30,
       "type": "misplaced_peak",
       "severity": "warning",
       "message": "Chunk 30: actual -0.80 vs ideal -0.21 (\u0394-0.59)",
-      "suggestion": "For a action/sci-fi film, this scene should feel more uplifting at this point in the story."
+      "suggestion": "For a action film, this scene should feel more uplifting at this point in the story."
     },
     {
       "chunk_id": 31,
       "type": "misplaced_peak",
       "severity": "warning",
       "message": "Chunk 31: actual -0.80 vs ideal -0.01 (\u0394-0.79)",
-      "suggestion": "For a action/sci-fi film, this scene should feel more uplifting at this point in the story."
+      "suggestion": "For a action film, this scene should feel more uplifting at this point in the story."
     },
     {
       "chunk_id": 32,
       "type": "misplaced_peak",
       "severity": "warning",
       "message": "Chunk 32: actual +0.80 vs ideal +0.20 (\u0394+0.60)",
-      "suggestion": "For a action/sci-fi film, this scene should feel darker at this point in the story."
+      "suggestion": "For a action film, this scene should feel darker at this point in the story."
+    },
+    {
+      "chunk_id": 12,
+      "type": "tension_debt",
+      "severity": "warning",
+      "message": "Tension debt = 1.20 \u2014 7 consecutive calm chunks",
+      "suggestion": "Introduce a conflict, obstacle, or revelation in the next scene to discharge audience tension debt"
+    },
+    {
+      "chunk_id": 13,
+      "type": "tension_debt",
+      "severity": "warning",
+      "message": "Tension debt = 1.40 \u2014 8 consecutive calm chunks",
+      "suggestion": "Introduce a conflict, obstacle, or revelation in the next scene to discharge audience tension debt"
+    },
+    {
+      "chunk_id": 14,
+      "type": "tension_debt",
+      "severity": "warning",
+      "message": "Tension debt = 1.60 \u2014 9 consecutive calm chunks",
+      "suggestion": "Introduce a conflict, obstacle, or revelation in the next scene to discharge audience tension debt"
+    },
+    {
+      "chunk_id": 15,
+      "type": "tension_debt",
+      "severity": "warning",
+      "message": "Tension debt = 1.60 \u2014 10 consecutive calm chunks",
+      "suggestion": "Introduce a conflict, obstacle, or revelation in the next scene to discharge audience tension debt"
     },
     {
       "chunk_id": 16,
       "type": "tension_debt",
       "severity": "warning",
-      "message": "Tension debt = 1.35 \u2014 11 consecutive calm chunks",
+      "message": "Tension debt = 1.80 \u2014 11 consecutive calm chunks",
+      "suggestion": "Introduce a conflict, obstacle, or revelation in the next scene to discharge audience tension debt"
+    },
+    {
+      "chunk_id": 17,
+      "type": "tension_debt",
+      "severity": "warning",
+      "message": "Tension debt = 1.80 \u2014 12 consecutive calm chunks",
+      "suggestion": "Introduce a conflict, obstacle, or revelation in the next scene to discharge audience tension debt"
+    },
+    {
+      "chunk_id": 18,
+      "type": "tension_debt",
+      "severity": "warning",
+      "message": "Tension debt = 1.80 \u2014 13 consecutive calm chunks",
+      "suggestion": "Introduce a conflict, obstacle, or revelation in the next scene to discharge audience tension debt"
+    },
+    {
+      "chunk_id": 19,
+      "type": "tension_debt",
+      "severity": "warning",
+      "message": "Tension debt = 2.00 \u2014 14 consecutive calm chunks",
+      "suggestion": "Introduce a conflict, obstacle, or revelation in the next scene to discharge audience tension debt"
+    },
+    {
+      "chunk_id": 20,
+      "type": "tension_debt",
+      "severity": "warning",
+      "message": "Tension debt = 1.50 \u2014 0 consecutive calm chunks",
+      "suggestion": "Introduce a conflict, obstacle, or revelation in the next scene to discharge audience tension debt"
+    },
+    {
+      "chunk_id": 21,
+      "type": "tension_debt",
+      "severity": "warning",
+      "message": "Tension debt = 1.70 \u2014 1 consecutive calm chunks",
+      "suggestion": "Introduce a conflict, obstacle, or revelation in the next scene to discharge audience tension debt"
+    },
+    {
+      "chunk_id": 22,
+      "type": "tension_debt",
+      "severity": "warning",
+      "message": "Tension debt = 1.70 \u2014 2 consecutive calm chunks",
+      "suggestion": "Introduce a conflict, obstacle, or revelation in the next scene to discharge audience tension debt"
+    },
+    {
+      "chunk_id": 23,
+      "type": "tension_debt",
+      "severity": "warning",
+      "message": "Tension debt = 1.20 \u2014 0 consecutive calm chunks",
       "suggestion": "Introduce a conflict, obstacle, or revelation in the next scene to discharge audience tension debt"
     },
     {

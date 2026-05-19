@@ -23,7 +23,7 @@ from typing import Optional
 from groq import Groq
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv(override=True)
 _CLIENT = Groq(api_key=os.getenv("GROQ_API_KEY_1", ""))
 MODEL = "llama-3.3-70b-versatile"
 MAX_RETRIES = 3
