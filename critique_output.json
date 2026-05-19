@@ -1,40 +1,372 @@
 {
-  "screenplay_score": 7.3,
+  "screenplay_score": 7.7,
   "score_breakdown": {
-    "pacing": 8.7,
-    "emotional_range": 4.0,
-    "dialogue": 8.6,
+    "pacing": 7.7,
+    "emotional_range": 9.0,
+    "dialogue": 5.6,
     "structure": 8.0
   },
-  "overall_verdict": "Avengers: Endgame masterfully navigates its complex, epic narrative with a well-balanced pacing score, effectively leveraging the genre's affinity for dramatic shifts to propel the story forward. While the emotional range score may indicate a lack of depth in certain character arcs, the film's dialogue and structure work in tandem to create an engaging, cohesive experience. The absence of major structural issues is a testament to the filmmakers' skill in orchestrating this grand finale.",
+  "overall_verdict": "Avengers: Endgame's narrative flow is a masterclass in balancing epic scope with emotional intimacy, though its frenetic pacing and clunky dialogue occasionally threaten to undermine the film's impact. The screenplay's structural issues, such as the extremely early peak tension, are largely mitigated by the film's genre demands and the audience's existing investment in the franchise. Ultimately, the film's ability to navigate its complex emotional landscape and deliver a satisfying conclusion is a testament to its narrative prowess.",
   "top_3_fixes": [
-    "Introduce more nuanced, emotionally resonant character development for secondary characters to elevate the emotional range and create a more impactful conclusion",
-    "Implement a more gradual, suspenseful build-up to key plot reveals, rather than relying on abrupt shifts, to maximize tension and audience engagement",
-    "Refine the narrative's thematic resonance by explicitly exploring the consequences of time travel and the Avengers' actions, adding depth to the story's emotional payoff"
+    "Rebalance the pacing by introducing a more gradual tension build-up in the first act, potentially by recontextualizing the peak tension at chunk 2 to a more traditional midpoint or third-act climax",
+    "Streamline dialogue in key chunks (3, 7, 8, 9, 11, 13, 15, 16, 17, 20, 24) by reducing word count and focusing on character-driven interactions, rather than relying on exposition or clunky plot explanations",
+    "Introduce more nuanced character arcs for secondary characters, particularly in the film's climax (chunks 28, 29, 32), to create a more emotionally resonant and cohesive conclusion to the franchise"
   ],
   "character_arcs": [],
   "dialogue_critiques": [
     {
-      "chunk_id": 1,
-      "line_text": "Old Man:",
-      "issue_type": "powerful",
-      "severity": "praise",
-      "suggestion": "Dramatically significant line."
+      "chunk_id": 3,
+      "line_text": "[699 words in chunk 3]",
+      "issue_type": "clunky",
+      "severity": "warning",
+      "suggestion": "This scene has 699 words of dialogue \u2014 consider trimming exposition. Show, don't tell."
     },
     {
-      "chunk_id": 1,
-      "line_text": "You never cheated those women.",
-      "issue_type": "powerful",
-      "severity": "praise",
-      "suggestion": "Dramatically significant line."
+      "chunk_id": 7,
+      "line_text": "[571 words in chunk 7]",
+      "issue_type": "clunky",
+      "severity": "warning",
+      "suggestion": "This scene has 571 words of dialogue \u2014 consider trimming exposition. Show, don't tell."
+    },
+    {
+      "chunk_id": 8,
+      "line_text": "[739 words in chunk 8]",
+      "issue_type": "clunky",
+      "severity": "warning",
+      "suggestion": "This scene has 739 words of dialogue \u2014 consider trimming exposition. Show, don't tell."
+    },
+    {
+      "chunk_id": 9,
+      "line_text": "[556 words in chunk 9]",
+      "issue_type": "clunky",
+      "severity": "warning",
+      "suggestion": "This scene has 556 words of dialogue \u2014 consider trimming exposition. Show, don't tell."
+    },
+    {
+      "chunk_id": 11,
+      "line_text": "[539 words in chunk 11]",
+      "issue_type": "clunky",
+      "severity": "warning",
+      "suggestion": "This scene has 539 words of dialogue \u2014 consider trimming exposition. Show, don't tell."
+    },
+    {
+      "chunk_id": 13,
+      "line_text": "[547 words in chunk 13]",
+      "issue_type": "clunky",
+      "severity": "warning",
+      "suggestion": "This scene has 547 words of dialogue \u2014 consider trimming exposition. Show, don't tell."
+    },
+    {
+      "chunk_id": 15,
+      "line_text": "[506 words in chunk 15]",
+      "issue_type": "clunky",
+      "severity": "warning",
+      "suggestion": "This scene has 506 words of dialogue \u2014 consider trimming exposition. Show, don't tell."
+    },
+    {
+      "chunk_id": 16,
+      "line_text": "[418 words in chunk 16]",
+      "issue_type": "clunky",
+      "severity": "warning",
+      "suggestion": "This scene has 418 words of dialogue \u2014 consider trimming exposition. Show, don't tell."
+    },
+    {
+      "chunk_id": 17,
+      "line_text": "[540 words in chunk 17]",
+      "issue_type": "clunky",
+      "severity": "warning",
+      "suggestion": "This scene has 540 words of dialogue \u2014 consider trimming exposition. Show, don't tell."
+    },
+    {
+      "chunk_id": 20,
+      "line_text": "[510 words in chunk 20]",
+      "issue_type": "clunky",
+      "severity": "warning",
+      "suggestion": "This scene has 510 words of dialogue \u2014 consider trimming exposition. Show, don't tell."
+    },
+    {
+      "chunk_id": 24,
+      "line_text": "[476 words in chunk 24]",
+      "issue_type": "clunky",
+      "severity": "warning",
+      "suggestion": "This scene has 476 words of dialogue \u2014 consider trimming exposition. Show, don't tell."
+    },
+    {
+      "chunk_id": 33,
+      "line_text": "[480 words in chunk 33]",
+      "issue_type": "clunky",
+      "severity": "warning",
+      "suggestion": "This scene has 480 words of dialogue \u2014 consider trimming exposition. Show, don't tell."
     }
   ],
-  "plot_issues": [],
+  "plot_issues": [
+    {
+      "issue_type": "climactic_volatility",
+      "severity": "info",
+      "description": "High emotional volatility (\u0394+1.60) at chunk 28 \u2014 typical for a climax.",
+      "affected_chunks": [
+        28
+      ],
+      "suggestion": "Verify this aligns with the main battle or final confrontation. High volatility here is usually a strength."
+    },
+    {
+      "issue_type": "climactic_volatility",
+      "severity": "info",
+      "description": "High emotional volatility (\u0394-1.30) at chunk 29 \u2014 typical for a climax.",
+      "affected_chunks": [
+        29
+      ],
+      "suggestion": "Verify this aligns with the main battle or final confrontation. High volatility here is usually a strength."
+    },
+    {
+      "issue_type": "climactic_volatility",
+      "severity": "info",
+      "description": "High emotional volatility (\u0394+1.60) at chunk 32 \u2014 typical for a climax.",
+      "affected_chunks": [
+        32
+      ],
+      "suggestion": "Verify this aligns with the main battle or final confrontation. High volatility here is usually a strength."
+    },
+    {
+      "issue_type": "front_loaded_drama",
+      "severity": "info",
+      "description": "Peak tension is at chunk 2 (3% into the film) \u2014 extremely early.",
+      "affected_chunks": [
+        2
+      ],
+      "suggestion": "For sequels or epics starting in media res, this is acceptable. Otherwise, build tension more gradually."
+    }
+  ],
   "hero_journey_map": {},
-  "pacing_flags": [],
+  "pacing_flags": [
+    {
+      "chunk_id": 2,
+      "type": "misplaced_peak",
+      "severity": "warning",
+      "critique": "Chunk 2: actual -0.80 vs ideal -0.02 (\u0394-0.78)",
+      "fix": "For a action/sci-fi film, this scene should feel more uplifting at this point in the story."
+    },
+    {
+      "chunk_id": 3,
+      "type": "misplaced_peak",
+      "severity": "warning",
+      "critique": "Chunk 3: actual -0.80 vs ideal -0.14 (\u0394-0.66)",
+      "fix": "For a action/sci-fi film, this scene should feel more uplifting at this point in the story."
+    },
+    {
+      "chunk_id": 4,
+      "type": "misplaced_peak",
+      "severity": "warning",
+      "critique": "Chunk 4: actual -0.80 vs ideal -0.26 (\u0394-0.54)",
+      "fix": "For a action/sci-fi film, this scene should feel more uplifting at this point in the story."
+    },
+    {
+      "chunk_id": 6,
+      "type": "misplaced_peak",
+      "severity": "warning",
+      "critique": "Chunk 6: actual +0.20 vs ideal -0.37 (\u0394+0.57)",
+      "fix": "For a action/sci-fi film, this scene should feel darker at this point in the story."
+    },
+    {
+      "chunk_id": 7,
+      "type": "misplaced_peak",
+      "severity": "warning",
+      "critique": "Chunk 7: actual +0.30 vs ideal -0.41 (\u0394+0.71)",
+      "fix": "For a action/sci-fi film, this scene should feel darker at this point in the story."
+    },
+    {
+      "chunk_id": 9,
+      "type": "misplaced_peak",
+      "severity": "warning",
+      "critique": "Chunk 9: actual +0.20 vs ideal -0.49 (\u0394+0.69)",
+      "fix": "For a action/sci-fi film, this scene should feel darker at this point in the story."
+    },
+    {
+      "chunk_id": 10,
+      "type": "misplaced_peak",
+      "severity": "warning",
+      "critique": "Chunk 10: actual +0.30 vs ideal -0.46 (\u0394+0.76)",
+      "fix": "For a action/sci-fi film, this scene should feel darker at this point in the story."
+    },
+    {
+      "chunk_id": 11,
+      "type": "misplaced_peak",
+      "severity": "warning",
+      "critique": "Chunk 11: actual +0.30 vs ideal -0.39 (\u0394+0.69)",
+      "fix": "For a action/sci-fi film, this scene should feel darker at this point in the story."
+    },
+    {
+      "chunk_id": 12,
+      "type": "misplaced_peak",
+      "severity": "warning",
+      "critique": "Chunk 12: actual +0.20 vs ideal -0.33 (\u0394+0.53)",
+      "fix": "For a action/sci-fi film, this scene should feel darker at this point in the story."
+    },
+    {
+      "chunk_id": 16,
+      "type": "misplaced_peak",
+      "severity": "warning",
+      "critique": "Chunk 16: actual +0.20 vs ideal -0.42 (\u0394+0.62)",
+      "fix": "For a action/sci-fi film, this scene should feel darker at this point in the story."
+    },
+    {
+      "chunk_id": 19,
+      "type": "misplaced_peak",
+      "severity": "warning",
+      "critique": "Chunk 19: actual +0.20 vs ideal -0.46 (\u0394+0.66)",
+      "fix": "For a action/sci-fi film, this scene should feel darker at this point in the story."
+    },
+    {
+      "chunk_id": 21,
+      "type": "misplaced_peak",
+      "severity": "warning",
+      "critique": "Chunk 21: actual +0.20 vs ideal -0.32 (\u0394+0.52)",
+      "fix": "For a action/sci-fi film, this scene should feel darker at this point in the story."
+    },
+    {
+      "chunk_id": 25,
+      "type": "misplaced_peak",
+      "severity": "warning",
+      "critique": "Chunk 25: actual +0.20 vs ideal -0.81 (\u0394+1.01)",
+      "fix": "For a action/sci-fi film, this scene should feel darker at this point in the story."
+    },
+    {
+      "chunk_id": 28,
+      "type": "misplaced_peak",
+      "severity": "warning",
+      "critique": "Chunk 28: actual +0.80 vs ideal -0.56 (\u0394+1.36)",
+      "fix": "For a action/sci-fi film, this scene should feel darker at this point in the story."
+    },
+    {
+      "chunk_id": 30,
+      "type": "misplaced_peak",
+      "severity": "warning",
+      "critique": "Chunk 30: actual -0.80 vs ideal -0.21 (\u0394-0.59)",
+      "fix": "For a action/sci-fi film, this scene should feel more uplifting at this point in the story."
+    },
+    {
+      "chunk_id": 31,
+      "type": "misplaced_peak",
+      "severity": "warning",
+      "critique": "Chunk 31: actual -0.80 vs ideal -0.01 (\u0394-0.79)",
+      "fix": "For a action/sci-fi film, this scene should feel more uplifting at this point in the story."
+    },
+    {
+      "chunk_id": 32,
+      "type": "misplaced_peak",
+      "severity": "warning",
+      "critique": "Chunk 32: actual +0.80 vs ideal +0.20 (\u0394+0.60)",
+      "fix": "For a action/sci-fi film, this scene should feel darker at this point in the story."
+    },
+    {
+      "chunk_id": 16,
+      "type": "tension_debt",
+      "severity": "warning",
+      "critique": "Tension debt = 1.35 \u2014 11 consecutive calm chunks",
+      "fix": "Introduce a conflict, obstacle, or revelation in the next scene to discharge audience tension debt"
+    },
+    {
+      "chunk_id": 2,
+      "type": "momentum_spike",
+      "severity": "info",
+      "critique": "[Deepening spike] Falling spike (\u0394-1.00) at chunk 2 \u2014 emotional descent continues in already dark zone",
+      "fix": "Film deepens its darkness. Ensure this compounds earlier tension rather than feeling repetitive. Audience needs at least one micro-relief before the next dark beat."
+    },
+    {
+      "chunk_id": 6,
+      "type": "momentum_spike",
+      "severity": "info",
+      "critique": "[Rising spike (volatile zone)] Rising spike (\u0394+1.00) at chunk 6 \u2014 positive surge in already active emotional zone",
+      "fix": "Scene escalates positively but audience may be numbed if surrounded by other high-energy moments. Consider pacing."
+    },
+    {
+      "chunk_id": 8,
+      "type": "momentum_spike",
+      "severity": "info",
+      "critique": "[Deepening spike] Falling spike (\u0394-0.50) at chunk 8 \u2014 emotional descent continues in already dark zone",
+      "fix": "Film deepens its darkness. Ensure this compounds earlier tension rather than feeling repetitive. Audience needs at least one micro-relief before the next dark beat."
+    },
+    {
+      "chunk_id": 17,
+      "type": "momentum_spike",
+      "severity": "info",
+      "critique": "[Deepening spike] Falling spike (\u0394-0.70) at chunk 17 \u2014 emotional descent continues in already dark zone",
+      "fix": "Film deepens its darkness. Ensure this compounds earlier tension rather than feeling repetitive. Audience needs at least one micro-relief before the next dark beat."
+    },
+    {
+      "chunk_id": 19,
+      "type": "momentum_spike",
+      "severity": "info",
+      "critique": "[Rising spike (volatile zone)] Rising spike (\u0394+0.50) at chunk 19 \u2014 positive surge in already active emotional zone",
+      "fix": "Scene escalates positively but audience may be numbed if surrounded by other high-energy moments. Consider pacing."
+    },
+    {
+      "chunk_id": 20,
+      "type": "momentum_spike",
+      "severity": "info",
+      "critique": "[Deepening spike] Falling spike (\u0394-0.90) at chunk 20 \u2014 emotional descent continues in already dark zone",
+      "fix": "Film deepens its darkness. Ensure this compounds earlier tension rather than feeling repetitive. Audience needs at least one micro-relief before the next dark beat."
+    },
+    {
+      "chunk_id": 21,
+      "type": "momentum_spike",
+      "severity": "info",
+      "critique": "[Rising spike (volatile zone)] Rising spike (\u0394+0.90) at chunk 21 \u2014 positive surge in already active emotional zone",
+      "fix": "Scene escalates positively but audience may be numbed if surrounded by other high-energy moments. Consider pacing."
+    },
+    {
+      "chunk_id": 22,
+      "type": "momentum_spike",
+      "severity": "info",
+      "critique": "[Deepening spike] Falling spike (\u0394-0.50) at chunk 22 \u2014 emotional descent continues in already dark zone",
+      "fix": "Film deepens its darkness. Ensure this compounds earlier tension rather than feeling repetitive. Audience needs at least one micro-relief before the next dark beat."
+    },
+    {
+      "chunk_id": 23,
+      "type": "momentum_spike",
+      "severity": "info",
+      "critique": "[Deepening spike] Falling spike (\u0394-0.50) at chunk 23 \u2014 emotional descent continues in already dark zone",
+      "fix": "Film deepens its darkness. Ensure this compounds earlier tension rather than feeling repetitive. Audience needs at least one micro-relief before the next dark beat."
+    },
+    {
+      "chunk_id": 25,
+      "type": "momentum_spike",
+      "severity": "info",
+      "critique": "[Rising spike (volatile zone)] Rising spike (\u0394+1.00) at chunk 25 \u2014 positive surge in already active emotional zone",
+      "fix": "Scene escalates positively but audience may be numbed if surrounded by other high-energy moments. Consider pacing."
+    },
+    {
+      "chunk_id": 26,
+      "type": "momentum_spike",
+      "severity": "info",
+      "critique": "[Deepening spike] Falling spike (\u0394-1.00) at chunk 26 \u2014 emotional descent continues in already dark zone",
+      "fix": "Film deepens its darkness. Ensure this compounds earlier tension rather than feeling repetitive. Audience needs at least one micro-relief before the next dark beat."
+    },
+    {
+      "chunk_id": 28,
+      "type": "momentum_spike",
+      "severity": "info",
+      "critique": "[Rising spike (volatile zone)] Rising spike (\u0394+1.60) at chunk 28 \u2014 positive surge in already active emotional zone",
+      "fix": "Scene escalates positively but audience may be numbed if surrounded by other high-energy moments. Consider pacing."
+    },
+    {
+      "chunk_id": 29,
+      "type": "momentum_spike",
+      "severity": "info",
+      "critique": "[Deepening spike] Falling spike (\u0394-1.30) at chunk 29 \u2014 emotional descent continues in already dark zone",
+      "fix": "Film deepens its darkness. Ensure this compounds earlier tension rather than feeling repetitive. Audience needs at least one micro-relief before the next dark beat."
+    },
+    {
+      "chunk_id": 32,
+      "type": "momentum_spike",
+      "severity": "info",
+      "critique": "[Rising spike (volatile zone)] Rising spike (\u0394+1.60) at chunk 32 \u2014 positive surge in already active emotional zone",
+      "fix": "Scene escalates positively but audience may be numbed if surrounded by other high-energy moments. Consider pacing."
+    }
+  ],
   "metadata": {
     "film_title": "Avengers: Endgame",
     "genre": "action/sci-fi",
-    "chunks_analyzed": 1
+    "chunks_analyzed": 34
   }
 }

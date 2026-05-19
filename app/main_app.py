@@ -383,7 +383,7 @@ with st.expander("✍️ Style Transfer Panel (Rewrite a Scene)"):
         chunk_sel = st.selectbox("Select Chunk", options=chunks)
     with col_s2:
         director = st.selectbox("Select Director", 
-                                ["Anurag Kashyap", "Imtiaz Ali", "Mani Ratnam"])
+                                ["Anurag Kashyap", "Imtiaz Ali", "Mani Ratnam", "Christopher Nolan"])
     with col_s3:
         st.write("") # spacing
         st.write("")
@@ -392,7 +392,7 @@ with st.expander("✍️ Style Transfer Panel (Rewrite a Scene)"):
             with st.spinner(f"Rewriting Chunk {chunk_sel} as {director}..."):
                 # 1. Fetch prompt
                 import style_transfer_prompts as stp
-                prompt_name = f"PROMPT_{list(['Anurag Kashyap', 'Imtiaz Ali', 'Mani Ratnam']).index(director)+1}_{director.replace(' ', '_').upper()}"
+                prompt_name = f"PROMPT_{list(['Anurag Kashyap', 'Imtiaz Ali', 'Mani Ratnam', 'Christopher Nolan']).index(director)+1}_{director.replace(' ', '_').upper()}"
                 base_prompt = getattr(stp, prompt_name)
                 
                 # 2. Re-extract chunk text from SRT

@@ -7,6 +7,8 @@ def rewrite_scene(base_prompt: str, chunk_text: str) -> str:
     and replaces the hardcoded scene with the actual user-selected chunk text,
     then calls Groq to perform the style transfer.
     """
+    from dotenv import load_dotenv
+    load_dotenv(override=True)
     api_key = os.getenv("GROQ_API_KEY_1") or os.getenv("GROQ_API_KEY_2")
     if not api_key:
         return "Error: Neither GROQ_API_KEY_1 nor GROQ_API_KEY_2 found in environment."

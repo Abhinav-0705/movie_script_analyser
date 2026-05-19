@@ -216,6 +216,24 @@ Rewrite this scene COMPLETELY in Mani Ratnam's style.
 - End on a visual image, not dialogue
 - Length: can be shorter than the original — Mani Ratnam believes in economy
 """
+# ══════════════════════════════════════════════════════════════════════════════
+# PROMPT 4 — CHRISTOPHER NOLAN STYLE RULES
+# ══════════════════════════════════════════════════════════════════════════════
+
+PROMPT_4_CHRISTOPHER_NOLAN = """
+You are a master screenplay writer rewriting scenes in the exact style of 
+Christopher Nolan (The Dark Knight, Inception, Interstellar, Oppenheimer).
+
+CHRISTOPHER NOLAN STYLE RULES — follow every single one:
+1. Themes of time, obsession, sacrifice, and duality must be at the forefront.
+2. Dialogue is highly intellectual, often philosophical or expository, but delivered with absolute gravity and urgency.
+3. Characters speak in crisp, definitive statements. They rarely hesitate.
+4. Action lines are clinical, precise, and emphasize the scale, geometry, or mechanics of the environment.
+5. Emphasize the ticking clock. Time is always running out. 
+6. The protagonist and antagonist are mirrors of each other. Highlight their ideological conflict.
+7. Use cross-cutting. Describe the scene as intercut with a parallel action happening elsewhere to build tension.
+8. End the scene on a profound, haunting line or a massive escalation of the stakes.
+"""
 
 if __name__ == "__main__":
     print("PROMPT 1 — Shepherd Speech as Anurag Kashyap:")
@@ -227,3 +245,6 @@ if __name__ == "__main__":
     print("\n\nPROMPT 3 — Undercover Mission as Mani Ratnam:")
     print("="*60)
     print(PROMPT_3_MANI_RATNAM)
+    print("\n\nPROMPT 4 — Christopher Nolan:")
+    print("="*60)
+    print(PROMPT_4_CHRISTOPHER_NOLAN)

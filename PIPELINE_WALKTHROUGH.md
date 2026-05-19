@@ -613,19 +613,70 @@ python3 run_pipeline.py \
 
 ---
 
-## What's Next (MS-5 and MS-6)
+AI Screenplay Analyzer: Complete Architecture Guide
+This document provides a comprehensive, deep-dive explanation of the entire AI Screenplay Analyzer pipeline, from file ingestion to the final AI-generated studio verdict. The system is split into 5 Microservices (MS) that mimic the analytical process of a professional Hollywood script reader.
 
-**MS-5: `services/critique_engine.py`** *(not yet built)*  
-Takes both JSON files and produces a readable studio-note style report:
-- Character arc summaries
-- Clunky dialogue identification (from flagged lines)
-- Pacing critique (from flat zones + momentum)
-- Overall screenplay score with "Top 3 fixes"
+MS-1: Ingestion & Parsing (srt_parser.py)
+1. Why the .srt Format?
+A raw screenplay PDF is notoriously difficult for a computer to parse accurately due to massive formatting variations across different writers. The SubRip Subtitle (.srt) format solves this: it is the universal standard for timing dialogue to screen time. It provides exactly what the AI needs: dialogue text perfectly mapped to exact timestamps.
 
-**MS-6: `app/main_app.py`** *(not yet built)*  
-Streamlit dashboard:
-- File upload widget
-- Emotional arc line chart (Plotly)
-- Emotion heatmap (8 Plutchik emotions × N chunks)
-- Hero's Journey timeline
-- Critique report display
+2. How Parsing is Done
+Sanitization: The parser cleans out messy formatting like HTML tags (<i>, <b>) and normalizes line endings.
+Song Filtering: It detects and completely filters out song lyrics (usually denoted by italics or music notes). This is crucial for Indian cinema/Bollywood—if we don't filter them, a dramatic scene might incorrectly register as "Joyful" just because an upbeat background song is playing.
+3. The 5-Minute Chunking Strategy
+The parser groups the dialogue into 5-minute blocks.
+
+Why 5 minutes? In screenwriting, 1 page of a script equals roughly 1 minute of screen time. Therefore, 5 minutes is ~5 pages. This is the standard cinematic length for a "beat" or a "sequence." It is long enough to establish an emotional tone, but short enough to give us high-resolution tracking across a 3-hour film (yielding exactly 36 chunks for a 180-minute movie like Endgame).
+MS-3: Sentiment & Emotion Engine (The NLP Layer)
+This engine doesn't just do basic "Positive vs. Negative" sentiment. It uses a Two-Layer LLM Architecture:
+
+1. Macro Analysis (Layer 1)
+Uses a heavy LLM (llama-3.3-70b) to analyze the entire 5-minute chunk as a single block.
+
+Valence Score: It assigns an overall score from -1.0 (Maximum Despair/Tension) to +1.0 (Maximum Joy/Triumph).
+Trajectory: It determines if the scene is Rising, Falling, or Flat within those 5 minutes.
+2. Micro Analysis (Layer 2)
+Uses a faster LLM (llama-3.1-8b) to read every individual line of dialogue.
+
+Intensity Flagging: If it spots a line with an intensity over 0.7, it flags it as a "Dramatic Anchor." This ensures the system recognizes brilliant individual lines even if the overall scene is emotionally neutral.
+3. The Emotion Heatmap (Plutchik's Wheel)
+Binary positive/negative isn't enough. A negative scene could be Sad (a funeral), Angry (a fistfight), or Fearful (a horror chase).
+
+The heatmap uses Plutchik's 8 primary emotions (Joy, Trust, Anticipation, Surprise, Fear, Sadness, Disgust, Anger).
+Why this model? It lets us see the "cocktail" of a scene, and mathematically proves if a film is getting emotionally monotonous (e.g., if a script has 20 minutes of non-stop "Anger", the audience will feel burnt out).
+MS-4: Conflict & Pacing Detector (The Math Layer)
+This is where the magic happens. It takes the sentiment scores and applies mathematical pacing algorithms:
+
+1. Ideal Pacing Curves
+How it's calculated: The system holds mathematical arrays representing perfect "Hollywood arcs" for specific genres. (e.g., an Action curve dips at 25%, drops drastically at 75% for the "All is Lost" moment, and spikes at 100%). It uses linear interpolation to map the actual film against this ideal curve and calculates the RMSE (Root Mean Square Error).
+What it depicts: How closely the film adheres to expected, structurally sound Hollywood genre pacing.
+2. Tension Debt Curve
+How it's calculated:
+If a scene is calm/happy (score > 0.1), the system adds +0.15 to the debt.
+If a scene is dark/tense (score < -0.4), the system discharges -0.40 from the debt.
+What it interprets: This tracks audience fatigue. Audiences have an unconscious "budget" for happy scenes. If the debt crosses a threshold of 1.2 (about 8 calm scenes in a row), the audience is bored. They are owed a conflict.
+3. Narrative Momentum
+How it's calculated: This is the mathematical derivative (rate of change) of the sentiment arc (Score of Chunk 2 - Score of Chunk 1). If the |delta| > 0.45, it triggers a "Spike."
+What it interprets:
+A massive negative spike that interrupts a calm zone is flagged as a "Betrayal / Shock" (maximum dramatic impact).
+A positive spike is a "Victory / Relief."
+Tiny bars mean a "Flat Zone" (the movie is spinning its wheels).
+4. Hero's Journey Map
+The system prompts the LLM to map the scene summaries to Joseph Campbell's 10-stage monomyth (Ordinary World, The Ordeal, The Return, etc.).
+What it indicates: It proves whether the protagonist undergoes a complete, recognizable psychological transformation. If stages are missing, the character arc is likely broken.
+MS-5: The Critique Engine (Scoring & Rules)
+This takes all the math above and calculates exactly how "good" the script is based on strict rules.
+
+How Plot Issues are Detected:
+Front-Loaded Drama: Mathematically checks if the absolute lowest tension score occurs in the first 20% of the film. (Unless the genre is "Epic/Sequel", this is a severe warning).
+Missing Act 2 Conflict: Checks if the middle third of the chunks ever drop below a -0.3 score. If not, Act 2 is missing a major obstacle.
+Repetitive Emotion: Checks if the exact same dominant Plutchik emotion appears 4 chunks in a row.
+Unresolved Tension: Checks if the Tension Debt is high at the very end of the film without a climax discharge preceding it.
+Score Breakdown & Weights:
+Pacing (30%): Starts at 10. It subtracts points for RMSE curve deviation (RMSE * 3.0), tension debt peaks (debt * 0.5), and flat zones (count * 0.2). It adds bonus points if it detects well-structured "Betrayal" momentum spikes.
+Emotional Range (25%): Takes Highest Score - Lowest Score. If the spread is huge > 1.2, it gets a 9.0/10. If the film is emotionally flat, it drops to a 4.0/10.
+Dialogue (20%): Starts at 8.0. Adds +0.3 for every intense line found in Micro-Analysis. Subtracts -0.2 if a 5-minute chunk has over 400 words of dialogue (meaning it's a massive, clunky exposition dump).
+Structure (25%): Starts at 8.0. Subtracts a full -1.0 for critical plot issues (like Missing Act 2 Conflict). Adds a +0.5 bonus if the Hero's Journey map was completely filled out.
+The Final Verdict:
+The engine takes these four weighted scores to calculate a Final Screenplay Score. Finally, it injects all the data and plot issues into a prompt and sends this to the Groq LLM with strict instructions: "You are a nuanced cinematic analyst. Look at these numbers through the lens of the film's specific genre, and output a 3-sentence verdict and the Top 3 structural fixes."
+

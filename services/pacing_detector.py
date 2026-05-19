@@ -153,11 +153,31 @@ DEBT_DISCHARGE    = 0.40   # debt removed per chunk when score < -0.4 (tense sce
 DEBT_THRESHOLD    = 0.1    # score above this = "too comfortable", builds debt
 FATIGUE_THRESHOLD = 1.2    # debt above this = flag emotional fatigue risk
 
-def compute_tension_debt(chunks: list) -> tuple[list[float], list[PacingFlag]]:
+def compute_tension_debt(chunks: list, genre: str = "drama") -> tuple[list[float], list[PacingFlag]]:
     """
     Track running tension debt. Positive/neutral scenes build debt;
     tense/dark scenes discharge it.
     """
+    genre_lower = genre.lower()
+    if "comedy" in genre_lower or "romance" in genre_lower or "feel good" in genre_lower:
+        debt_build_rate = 0.08      # Builds much slower
+        debt_threshold = 0.3        # Only builds if very happy
+        fatigue_threshold = 1.6     # Can sustain more happiness
+        discharge_threshold = -0.2  # Needs less darkness to discharge
+        discharge_amount = 0.3
+    elif "action" in genre_lower or "thriller" in genre_lower or "epic" in genre_lower:
+        debt_build_rate = 0.20      # Builds faster
+        debt_threshold = 0.0        # Any calm builds debt
+        fatigue_threshold = 1.0     # Audiences get bored fast
+        discharge_threshold = -0.5  # Needs heavy action to discharge
+        discharge_amount = 0.5
+    else:
+        debt_build_rate = DEBT_BUILD_RATE
+        debt_threshold = DEBT_THRESHOLD
+        fatigue_threshold = FATIGUE_THRESHOLD
+        discharge_threshold = -0.4
+        discharge_amount = DEBT_DISCHARGE
+
     debt   = 0.0
     curve  = []
     flags  = []
@@ -167,18 +187,18 @@ def compute_tension_debt(chunks: list) -> tuple[list[float], list[PacingFlag]]:
     for chunk in chunks:
         score = chunk["macro_score"]
 
-        if score > DEBT_THRESHOLD:
-            debt += DEBT_BUILD_RATE
+        if score > debt_threshold:
+            debt += debt_build_rate
             consecutive_calm += 1
-        elif score < -0.4:
-            debt = max(0.0, debt - DEBT_DISCHARGE)
+        elif score < discharge_threshold:
+            debt = max(0.0, debt - discharge_amount)
             consecutive_calm = 0
         else:
             consecutive_calm += 1
 
         curve.append(round(debt, 3))
 
-        if debt > FATIGUE_THRESHOLD:
+        if debt > fatigue_threshold:
             flags.append(PacingFlag(
                 chunk_id   = chunk["chunk_id"],
                 flag_type  = "tension_debt",
@@ -483,7 +503,7 @@ def detect_pacing(
 
     # ── Innovation 2: Tension debt ────────────────────────────────────────────
     if verbose: print("  💳 Computing tension debt curve...", end=" ")
-    debt_curve, debt_flags = compute_tension_debt(chunks)
+    debt_curve, debt_flags = compute_tension_debt(chunks, genre)
     all_flags.extend(debt_flags)
     if verbose: print(f"peak debt = {max(debt_curve):.2f}")
 
