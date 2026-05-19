@@ -383,3 +383,14 @@ Built for the **GenAI NLP System Building Challenge Hackathon** — 3 days, 2 pe
 ## 📄 License
 
 MIT
+
+---
+
+## 📖 Developer Docs
+
+For a full technical walkthrough of every function, design decision, and modification guide see:
+
+**[PIPELINE_WALKTHROUGH.md](./PIPELINE_WALKTHROUGH.md)**
+
+Covers MS-1 (SRT Parser), MS-3 (Sentiment Analyzer), MS-4 (Pacing Detector) in depth — intended for teammates who want to understand or modify the pipeline.
+

@@ -1,0 +1,354 @@
+{
+  "pacing_score": 7.81,
+  "tension_debt_peak": 0.45,
+  "avg_momentum": 0.424,
+  "curve_deviation": 0.655,
+  "flat_zones": [],
+  "climax_chunk": null,
+  "climax_well_placed": false,
+  "act_boundaries": [
+    9,
+    10,
+    12,
+    13,
+    14,
+    16,
+    17,
+    18
+  ],
+  "hero_journey_map": {
+    "Ordinary World": 1,
+    "Call to Adventure": 2,
+    "Refusal of the Call": null,
+    "Meeting the Mentor": 9,
+    "Crossing the Threshold": 10,
+    "Tests/Allies/Enemies": 12,
+    "The Ordeal": 15,
+    "The Reward": 11,
+    "The Road Back": 16,
+    "The Return": 18
+  },
+  "tension_debt_curve": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.15,
+    0.3,
+    0.45,
+    0.05,
+    0.2,
+    0.0,
+    0.0,
+    0.0,
+    0.15,
+    0.0
+  ],
+  "ideal_vs_actual": {
+    "1": {
+      "actual": -0.8,
+      "ideal": 0.1,
+      "delta": -0.9
+    },
+    "2": {
+      "actual": -0.8,
+      "ideal": -0.135,
+      "delta": -0.665
+    },
+    "3": {
+      "actual": -0.5,
+      "ideal": -0.324,
+      "delta": -0.176
+    },
+    "4": {
+      "actual": -0.5,
+      "ideal": -0.402,
+      "delta": -0.098
+    },
+    "5": {
+      "actual": -0.5,
+      "ideal": -0.48,
+      "delta": -0.02
+    },
+    "6": {
+      "actual": -0.5,
+      "ideal": -0.412,
+      "delta": -0.088
+    },
+    "7": {
+      "actual": -0.5,
+      "ideal": -0.294,
+      "delta": -0.206
+    },
+    "8": {
+      "actual": -0.5,
+      "ideal": -0.247,
+      "delta": -0.253
+    },
+    "9": {
+      "actual": 0.2,
+      "ideal": -0.482,
+      "delta": 0.682
+    },
+    "10": {
+      "actual": 0.7,
+      "ideal": -0.512,
+      "delta": 1.212
+    },
+    "11": {
+      "actual": 0.8,
+      "ideal": -0.335,
+      "delta": 1.135
+    },
+    "12": {
+      "actual": -0.8,
+      "ideal": -0.488,
+      "delta": -0.312
+    },
+    "13": {
+      "actual": 0.2,
+      "ideal": -0.724,
+      "delta": 0.924
+    },
+    "14": {
+      "actual": -0.5,
+      "ideal": -0.826,
+      "delta": 0.326
+    },
+    "15": {
+      "actual": -0.8,
+      "ideal": -0.532,
+      "delta": -0.268
+    },
+    "16": {
+      "actual": -0.3,
+      "ideal": -0.184,
+      "delta": -0.116
+    },
+    "17": {
+      "actual": 0.2,
+      "ideal": 0.208,
+      "delta": -0.008
+    },
+    "18": {
+      "actual": -0.8,
+      "ideal": 0.6,
+      "delta": -1.4
+    }
+  },
+  "momentum_timeline": [
+    {
+      "chunk_id": 2,
+      "delta": 0.0,
+      "direction": "Stable",
+      "is_spike": false
+    },
+    {
+      "chunk_id": 3,
+      "delta": 0.3,
+      "direction": "Rising",
+      "is_spike": false
+    },
+    {
+      "chunk_id": 4,
+      "delta": 0.0,
+      "direction": "Stable",
+      "is_spike": false
+    },
+    {
+      "chunk_id": 5,
+      "delta": 0.0,
+      "direction": "Stable",
+      "is_spike": false
+    },
+    {
+      "chunk_id": 6,
+      "delta": 0.0,
+      "direction": "Stable",
+      "is_spike": false
+    },
+    {
+      "chunk_id": 7,
+      "delta": 0.0,
+      "direction": "Stable",
+      "is_spike": false
+    },
+    {
+      "chunk_id": 8,
+      "delta": 0.0,
+      "direction": "Stable",
+      "is_spike": false
+    },
+    {
+      "chunk_id": 9,
+      "delta": 0.7,
+      "direction": "Rising",
+      "is_spike": true
+    },
+    {
+      "chunk_id": 10,
+      "delta": 0.5,
+      "direction": "Rising",
+      "is_spike": true
+    },
+    {
+      "chunk_id": 11,
+      "delta": 0.1,
+      "direction": "Rising",
+      "is_spike": false
+    },
+    {
+      "chunk_id": 12,
+      "delta": -1.6,
+      "direction": "Falling",
+      "is_spike": true
+    },
+    {
+      "chunk_id": 13,
+      "delta": 1.0,
+      "direction": "Rising",
+      "is_spike": true
+    },
+    {
+      "chunk_id": 14,
+      "delta": -0.7,
+      "direction": "Falling",
+      "is_spike": true
+    },
+    {
+      "chunk_id": 15,
+      "delta": -0.3,
+      "direction": "Falling",
+      "is_spike": false
+    },
+    {
+      "chunk_id": 16,
+      "delta": 0.5,
+      "direction": "Rising",
+      "is_spike": true
+    },
+    {
+      "chunk_id": 17,
+      "delta": 0.5,
+      "direction": "Rising",
+      "is_spike": true
+    },
+    {
+      "chunk_id": 18,
+      "delta": -1.0,
+      "direction": "Falling",
+      "is_spike": true
+    }
+  ],
+  "flags": [
+    {
+      "chunk_id": 1,
+      "type": "misplaced_peak",
+      "severity": "warning",
+      "message": "Chunk 1: actual -0.80 vs ideal +0.10 (\u0394-0.90)",
+      "suggestion": "For a action/epic film, this scene should feel more uplifting at this point in the story."
+    },
+    {
+      "chunk_id": 2,
+      "type": "misplaced_peak",
+      "severity": "warning",
+      "message": "Chunk 2: actual -0.80 vs ideal -0.14 (\u0394-0.67)",
+      "suggestion": "For a action/epic film, this scene should feel more uplifting at this point in the story."
+    },
+    {
+      "chunk_id": 9,
+      "type": "misplaced_peak",
+      "severity": "warning",
+      "message": "Chunk 9: actual +0.20 vs ideal -0.48 (\u0394+0.68)",
+      "suggestion": "For a action/epic film, this scene should feel darker at this point in the story."
+    },
+    {
+      "chunk_id": 10,
+      "type": "misplaced_peak",
+      "severity": "warning",
+      "message": "Chunk 10: actual +0.70 vs ideal -0.51 (\u0394+1.21)",
+      "suggestion": "For a action/epic film, this scene should feel darker at this point in the story."
+    },
+    {
+      "chunk_id": 11,
+      "type": "misplaced_peak",
+      "severity": "warning",
+      "message": "Chunk 11: actual +0.80 vs ideal -0.34 (\u0394+1.14)",
+      "suggestion": "For a action/epic film, this scene should feel darker at this point in the story."
+    },
+    {
+      "chunk_id": 13,
+      "type": "misplaced_peak",
+      "severity": "warning",
+      "message": "Chunk 13: actual +0.20 vs ideal -0.72 (\u0394+0.92)",
+      "suggestion": "For a action/epic film, this scene should feel darker at this point in the story."
+    },
+    {
+      "chunk_id": 18,
+      "type": "misplaced_peak",
+      "severity": "warning",
+      "message": "Chunk 18: actual -0.80 vs ideal +0.60 (\u0394-1.40)",
+      "suggestion": "For a action/epic film, this scene should feel more uplifting at this point in the story."
+    },
+    {
+      "chunk_id": 9,
+      "type": "momentum_spike",
+      "severity": "info",
+      "message": "[Rising spike (volatile zone)] Rising spike (\u0394+0.70) at chunk 9 \u2014 positive surge in already active emotional zone",
+      "suggestion": "Scene escalates positively but audience may be numbed if surrounded by other high-energy moments. Consider pacing."
+    },
+    {
+      "chunk_id": 10,
+      "type": "momentum_spike",
+      "severity": "info",
+      "message": "[Rising spike (volatile zone)] Rising spike (\u0394+0.50) at chunk 10 \u2014 positive surge in already active emotional zone",
+      "suggestion": "Scene escalates positively but audience may be numbed if surrounded by other high-energy moments. Consider pacing."
+    },
+    {
+      "chunk_id": 12,
+      "type": "momentum_spike",
+      "severity": "info",
+      "message": "[Deepening spike] Falling spike (\u0394-1.60) at chunk 12 \u2014 emotional descent continues in already dark zone",
+      "suggestion": "Film deepens its darkness. Ensure this compounds earlier tension rather than feeling repetitive. Audience needs at least one micro-relief before the next dark beat."
+    },
+    {
+      "chunk_id": 13,
+      "type": "momentum_spike",
+      "severity": "info",
+      "message": "[Rising spike (volatile zone)] Rising spike (\u0394+1.00) at chunk 13 \u2014 positive surge in already active emotional zone",
+      "suggestion": "Scene escalates positively but audience may be numbed if surrounded by other high-energy moments. Consider pacing."
+    },
+    {
+      "chunk_id": 14,
+      "type": "momentum_spike",
+      "severity": "info",
+      "message": "[Deepening spike] Falling spike (\u0394-0.70) at chunk 14 \u2014 emotional descent continues in already dark zone",
+      "suggestion": "Film deepens its darkness. Ensure this compounds earlier tension rather than feeling repetitive. Audience needs at least one micro-relief before the next dark beat."
+    },
+    {
+      "chunk_id": 16,
+      "type": "momentum_spike",
+      "severity": "info",
+      "message": "[Rising spike (volatile zone)] Rising spike (\u0394+0.50) at chunk 16 \u2014 positive surge in already active emotional zone",
+      "suggestion": "Scene escalates positively but audience may be numbed if surrounded by other high-energy moments. Consider pacing."
+    },
+    {
+      "chunk_id": 17,
+      "type": "momentum_spike",
+      "severity": "info",
+      "message": "[Rising spike (volatile zone)] Rising spike (\u0394+0.50) at chunk 17 \u2014 positive surge in already active emotional zone",
+      "suggestion": "Scene escalates positively but audience may be numbed if surrounded by other high-energy moments. Consider pacing."
+    },
+    {
+      "chunk_id": 18,
+      "type": "momentum_spike",
+      "severity": "info",
+      "message": "[Deepening spike] Falling spike (\u0394-1.00) at chunk 18 \u2014 emotional descent continues in already dark zone",
+      "suggestion": "Film deepens its darkness. Ensure this compounds earlier tension rather than feeling repetitive. Audience needs at least one micro-relief before the next dark beat."
+    }
+  ]
+}

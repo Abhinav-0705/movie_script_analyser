@@ -1,15 +1,19 @@
 {
-  "overall_score": -0.65,
+  "overall_score": -0.317,
   "peak_tension_chunk": 1,
-  "peak_joy_chunk": 3,
+  "peak_joy_chunk": 11,
   "flat_zones": [],
-  "act_boundaries": [],
-  "arc_shapes": {
-    "1": "Falling",
-    "2": "Flat",
-    "3": "Flat",
-    "4": "Falling"
-  },
+  "act_boundaries": [
+    9,
+    10,
+    12,
+    13,
+    14,
+    16,
+    17,
+    18
+  ],
+  "arc_shapes": {},
   "chunks": [
     {
       "chunk_id": 1,
@@ -26,24 +30,9 @@
         "disgust": 0.4,
         "anger": 0.7
       },
-      "trajectory": {
-        "start": 0.429,
-        "mid": 0.257,
-        "end": -0.6,
-        "shape": "Falling",
-        "delta": 1.029
-      },
-      "flagged_lines": [
-        "Malli.",
-        "Loki, the money they have given you was not for the song.",
-        "They\u2019ve bought your daughter.",
-        "MALLI!",
-        "Malli.",
-        "Malli... Malli...",
-        "My child.",
-        "Please give me back my child."
-      ],
-      "peak_line": "Loki, the money they have given you was not for the song.",
+      "trajectory": null,
+      "flagged_lines": [],
+      "peak_line": null,
       "word_count": 111
     },
     {
@@ -56,20 +45,14 @@
         "trust": 0.0,
         "anticipation": 0.2,
         "surprise": 0.1,
-        "fear": 0.6,
+        "fear": 0.4,
         "sadness": 0.3,
-        "disgust": 0.4,
-        "anger": 0.9
+        "disgust": 0.2,
+        "anger": 0.8
       },
-      "trajectory": {
-        "start": 0.0,
-        "mid": 0.0,
-        "end": 0.0,
-        "shape": "Flat",
-        "delta": 0.0
-      },
+      "trajectory": null,
       "flagged_lines": [],
-      "peak_line": "Sergeant!",
+      "peak_line": null,
       "word_count": 155
     },
     {
@@ -79,23 +62,17 @@
       "dominant_emotion": "fear",
       "emotions": {
         "joy": 0.0,
-        "trust": 0.0,
+        "trust": 0.1,
         "anticipation": 0.2,
-        "surprise": 0.1,
-        "fear": 0.8,
+        "surprise": 0.3,
+        "fear": 0.7,
         "sadness": 0.1,
         "disgust": 0.0,
         "anger": 0.2
       },
-      "trajectory": {
-        "start": 0.0,
-        "mid": 0.0,
-        "end": 0.0,
-        "shape": "Flat",
-        "delta": 0.0
-      },
+      "trajectory": null,
       "flagged_lines": [],
-      "peak_line": "Good God!",
+      "peak_line": null,
       "word_count": 61
     },
     {
@@ -113,35 +90,290 @@
         "disgust": 0.1,
         "anger": 0.4
       },
-      "trajectory": {
-        "start": 0.333,
-        "mid": -0.633,
-        "end": -0.143,
-        "shape": "Falling",
-        "delta": 0.476
-      },
-      "flagged_lines": [
-        "THE WATER",
-        "he brought back with him a little girl.",
-        "Why so?",
-        "It is a Gond child that you've brought, sir.",
-        "- So? - So what?",
-        "Do they have two horns on their head?",
-        "They are an innocent people, sir.",
-        "Even if you oppress them they won't raise their voice.",
-        "But they have a trait.",
-        "They like staying in herds like sheep.",
-        "Even if one lamb goes missing it causes them great distress.",
-        "So this tribal is going to shoot down the mighty British empire",
-        "So is this tribal going to take us down?",
-        "If at that time the lamb is in the tiger's mouth",
-        "he will break its teeth, pry its jaws open",
-        "and take the lamb back to its herd.",
-        "It seems that the shepherd has come to Delhi to begin his hunt.",
-        "The trap is set. Alert our brother."
-      ],
-      "peak_line": "Why so?",
+      "trajectory": null,
+      "flagged_lines": [],
+      "peak_line": null,
       "word_count": 287
+    },
+    {
+      "chunk_id": 5,
+      "macro_score": -0.5,
+      "macro_label": "Tense",
+      "dominant_emotion": "anger",
+      "emotions": {
+        "joy": 0.0,
+        "trust": 0.2,
+        "anticipation": 0.1,
+        "surprise": 0.3,
+        "fear": 0.4,
+        "sadness": 0.2,
+        "disgust": 0.5,
+        "anger": 0.8
+      },
+      "trajectory": null,
+      "flagged_lines": [],
+      "peak_line": null,
+      "word_count": 176
+    },
+    {
+      "chunk_id": 6,
+      "macro_score": -0.5,
+      "macro_label": "Tense",
+      "dominant_emotion": "anger",
+      "emotions": {
+        "joy": 0.0,
+        "trust": 0.2,
+        "anticipation": 0.4,
+        "surprise": 0.1,
+        "fear": 0.6,
+        "sadness": 0.3,
+        "disgust": 0.2,
+        "anger": 0.8
+      },
+      "trajectory": null,
+      "flagged_lines": [],
+      "peak_line": null,
+      "word_count": 410
+    },
+    {
+      "chunk_id": 7,
+      "macro_score": -0.5,
+      "macro_label": "Tense",
+      "dominant_emotion": "fear",
+      "emotions": {
+        "joy": 0.0,
+        "trust": 0.2,
+        "anticipation": 0.4,
+        "surprise": 0.3,
+        "fear": 0.7,
+        "sadness": 0.2,
+        "disgust": 0.1,
+        "anger": 0.5
+      },
+      "trajectory": null,
+      "flagged_lines": [],
+      "peak_line": null,
+      "word_count": 302
+    },
+    {
+      "chunk_id": 8,
+      "macro_score": -0.5,
+      "macro_label": "Fearful",
+      "dominant_emotion": "fear",
+      "emotions": {
+        "joy": 0.0,
+        "trust": 0.2,
+        "anticipation": 0.1,
+        "surprise": 0.3,
+        "fear": 0.8,
+        "sadness": 0.4,
+        "disgust": 0.0,
+        "anger": 0.1
+      },
+      "trajectory": null,
+      "flagged_lines": [],
+      "peak_line": null,
+      "word_count": 41
+    },
+    {
+      "chunk_id": 9,
+      "macro_score": 0.2,
+      "macro_label": "Hopeful",
+      "dominant_emotion": "trust",
+      "emotions": {
+        "joy": 0.3,
+        "trust": 0.6,
+        "anticipation": 0.2,
+        "surprise": 0.1,
+        "fear": 0.1,
+        "sadness": 0.2,
+        "disgust": 0.0,
+        "anger": 0.0
+      },
+      "trajectory": null,
+      "flagged_lines": [],
+      "peak_line": null,
+      "word_count": 128
+    },
+    {
+      "chunk_id": 10,
+      "macro_score": 0.7,
+      "macro_label": "Romantic",
+      "dominant_emotion": "joy",
+      "emotions": {
+        "joy": 0.8,
+        "trust": 0.6,
+        "anticipation": 0.4,
+        "surprise": 0.2,
+        "fear": 0.0,
+        "sadness": 0.0,
+        "disgust": 0.0,
+        "anger": 0.0
+      },
+      "trajectory": null,
+      "flagged_lines": [],
+      "peak_line": null,
+      "word_count": 425
+    },
+    {
+      "chunk_id": 11,
+      "macro_score": 0.8,
+      "macro_label": "Romantic",
+      "dominant_emotion": "joy",
+      "emotions": {
+        "joy": 0.7,
+        "trust": 0.6,
+        "anticipation": 0.5,
+        "surprise": 0.3,
+        "fear": 0.1,
+        "sadness": 0.0,
+        "disgust": 0.0,
+        "anger": 0.0
+      },
+      "trajectory": null,
+      "flagged_lines": [],
+      "peak_line": null,
+      "word_count": 392
+    },
+    {
+      "chunk_id": 12,
+      "macro_score": -0.8,
+      "macro_label": "Wrathful",
+      "dominant_emotion": "anger",
+      "emotions": {
+        "joy": 0.0,
+        "trust": 0.0,
+        "anticipation": 0.2,
+        "surprise": 0.3,
+        "fear": 0.4,
+        "sadness": 0.1,
+        "disgust": 0.6,
+        "anger": 0.8
+      },
+      "trajectory": null,
+      "flagged_lines": [],
+      "peak_line": null,
+      "word_count": 132
+    },
+    {
+      "chunk_id": 13,
+      "macro_score": 0.2,
+      "macro_label": "Neutral",
+      "dominant_emotion": "trust",
+      "emotions": {
+        "joy": 0.3,
+        "trust": 0.6,
+        "anticipation": 0.2,
+        "surprise": 0.1,
+        "fear": 0.1,
+        "sadness": 0.0,
+        "disgust": 0.0,
+        "anger": 0.0
+      },
+      "trajectory": null,
+      "flagged_lines": [],
+      "peak_line": null,
+      "word_count": 286
+    },
+    {
+      "chunk_id": 14,
+      "macro_score": -0.5,
+      "macro_label": "Sorrowful",
+      "dominant_emotion": "sadness",
+      "emotions": {
+        "joy": 0.1,
+        "trust": 0.2,
+        "anticipation": 0.1,
+        "surprise": 0.1,
+        "fear": 0.4,
+        "sadness": 0.7,
+        "disgust": 0.2,
+        "anger": 0.3
+      },
+      "trajectory": null,
+      "flagged_lines": [],
+      "peak_line": null,
+      "word_count": 344
+    },
+    {
+      "chunk_id": 15,
+      "macro_score": -0.8,
+      "macro_label": "Wrathful",
+      "dominant_emotion": "anger",
+      "emotions": {
+        "joy": 0.0,
+        "trust": 0.1,
+        "anticipation": 0.3,
+        "surprise": 0.1,
+        "fear": 0.4,
+        "sadness": 0.6,
+        "disgust": 0.5,
+        "anger": 0.8
+      },
+      "trajectory": null,
+      "flagged_lines": [],
+      "peak_line": null,
+      "word_count": 186
+    },
+    {
+      "chunk_id": 16,
+      "macro_score": -0.3,
+      "macro_label": "Tense",
+      "dominant_emotion": "fear",
+      "emotions": {
+        "joy": 0.1,
+        "trust": 0.4,
+        "anticipation": 0.6,
+        "surprise": 0.2,
+        "fear": 0.8,
+        "sadness": 0.5,
+        "disgust": 0.1,
+        "anger": 0.3
+      },
+      "trajectory": null,
+      "flagged_lines": [],
+      "peak_line": null,
+      "word_count": 276
+    },
+    {
+      "chunk_id": 17,
+      "macro_score": 0.2,
+      "macro_label": "Hopeful",
+      "dominant_emotion": "trust",
+      "emotions": {
+        "joy": 0.3,
+        "trust": 0.8,
+        "anticipation": 0.4,
+        "surprise": 0.1,
+        "fear": 0.2,
+        "sadness": 0.2,
+        "disgust": 0.0,
+        "anger": 0.1
+      },
+      "trajectory": null,
+      "flagged_lines": [],
+      "peak_line": null,
+      "word_count": 162
+    },
+    {
+      "chunk_id": 18,
+      "macro_score": -0.8,
+      "macro_label": "Sorrowful",
+      "dominant_emotion": "sadness",
+      "emotions": {
+        "joy": 0.0,
+        "trust": 0.2,
+        "anticipation": 0.1,
+        "surprise": 0.3,
+        "fear": 0.6,
+        "sadness": 0.8,
+        "disgust": 0.1,
+        "anger": 0.4
+      },
+      "trajectory": null,
+      "flagged_lines": [],
+      "peak_line": null,
+      "word_count": 144
     }
   ]
 }
